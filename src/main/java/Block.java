@@ -8,8 +8,8 @@
  */
 public class Block {
     private final Point position=new Point();
-    boolean canBeTravel;
-    int generationRate;
+    private boolean canBeTravel;
+    private int generationRate;
     
     public Point getPosition() {
         return position;
