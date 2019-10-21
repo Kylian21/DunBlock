@@ -11,10 +11,12 @@
 public class MineralBloc extends InteractiveBloc {
     Mineral MineralType;
 
-    public MineralBloc(Mineral MineralType, int percentageOfAppearing, Character character, boolean canBeTravel, int generationRate, Point position) {
-        super(percentageOfAppearing, character, canBeTravel, generationRate, position);
+    public MineralBloc(Mineral MineralType, int percentageOfAppearing, Character character, Point position) {
+        super(percentageOfAppearing, character, position);
         this.MineralType = MineralType;
     }
+
+    
     
     
     

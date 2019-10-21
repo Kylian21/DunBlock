@@ -10,14 +10,14 @@
  */
 public class Hero extends CharacterBloc{
 
-    public Hero(int lingots, tool[] Inventory, int healthPoint, int[] attack, String name, Point position) {
+    public Hero(int lingots, Tool[] Inventory, int healthPoint, int[] attack, String name, Point position) {
         super(healthPoint, attack, name, position);
         this.lingots = lingots;
         this.Inventory = Inventory;
     }
     
     int lingots;
-    tool[] Inventory;
+    Tool[] Inventory;
     
     void move (Point toPosition){
         super.setPosition(toPosition);
