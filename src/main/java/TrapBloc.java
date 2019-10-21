@@ -11,8 +11,8 @@
 public class TrapBloc extends InteractiveBloc {
     private final int attack[];
 
-    public TrapBloc(int[] attack, int percentageOfAppearing, Character character, Point position) {
-        super(percentageOfAppearing, character, position);
+    public TrapBloc(int[] attack, Character character, Point position) {
+        super(5, character, position);
         this.attack = attack;
     }
 

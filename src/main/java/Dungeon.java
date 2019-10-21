@@ -17,7 +17,13 @@ public class Dungeon {
         this.SIZEY = SIZEY;
     }
 
-    
+    public void dungeonGenerator(){
+        for(int i=0;i<SIZEY;i++){
+            for(int k=0;k<SIZEX;k++){
+                
+            }
+        }
+    }
     public void printDungeon(){
         for(int i=0;i<SIZEY;i++){
             for(int k=0;k<SIZEX;k++){
