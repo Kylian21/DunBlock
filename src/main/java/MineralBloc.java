@@ -9,13 +9,21 @@
  * @author Louis HARISMENDY & Kylian SALOMON
  */
 public class MineralBloc extends InteractiveBloc {
-    Mineral MineralType;
+    private final Mineral MineralType;
+    private boolean blocMined;
 
-    public MineralBloc(Mineral MineralType, int percentageOfAppearing, Character character, Point position) {
+    public MineralBloc(Mineral MineralType, int percentageOfAppearing, Character character, Point position,boolean blocMined) {
         super(percentageOfAppearing, character, position);
         this.MineralType = MineralType;
+        this.blocMined=blocMined;
     }
 
+    @Override
+    public String toString() {
+        return "*";
+    }
+    
+    
     
     
     

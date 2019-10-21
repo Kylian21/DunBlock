@@ -9,12 +9,19 @@
  * @author Kylian Salomon
  */
 public class TrapBloc extends InteractiveBloc {
-    int attack[];
+    private final int attack[];
 
-    public TrapBloc(int[] attack, int percentageOfAppearing, Character character, boolean canBeTravel, int generationRate, Point position) {
-        super(percentageOfAppearing, character, canBeTravel, generationRate, position);
+    public TrapBloc(int[] attack, int percentageOfAppearing, Character character, Point position) {
+        super(percentageOfAppearing, character, position);
         this.attack = attack;
     }
+
+    @Override
+    public String toString() {
+        return " ";
+    }
+
+    
     
     
     

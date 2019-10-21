@@ -9,14 +9,20 @@
  * @author Kylian Salomon
  */
 public class InteractiveBloc extends Bloc {
-    int percentageOfAppearing;
+    private final int percentageOfAppearing;
     Character character;
 
-    public InteractiveBloc(int percentageOfAppearing, Character character, boolean canBeTravel, int generationRate, Point position) {
-        super(canBeTravel, generationRate, position);
+    public InteractiveBloc(int percentageOfAppearing, Character character, Point position) {
+        super(position);
         this.percentageOfAppearing = percentageOfAppearing;
         this.character = character;
     }
+    
+    @Override
+    public String toString(){
+        return " ";
+    }
+    
     
     
 }

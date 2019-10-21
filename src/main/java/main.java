@@ -8,12 +8,8 @@
  *
  * @author Kylian Salomon
  */
-public class Tool {
-    Mineral MineralType;
-
-    public Tool(Mineral MineralType) {
-        this.MineralType = MineralType;
-    }
+public class main {
+    Dungeon donjon = new Dungeon(20,20);
     
     
 }
