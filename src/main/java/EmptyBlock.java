@@ -11,6 +11,12 @@
 public class EmptyBlock extends Block{
     Character character = new Character();
 
+    public EmptyBlock(boolean canBeTravel, int generationRate) {
+        super(canBeTravel, generationRate);
+    }
+
+    
+    
     public Character getCharacter() {
         return character;
     }
