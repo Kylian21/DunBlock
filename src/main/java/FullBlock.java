@@ -9,10 +9,12 @@
  * @author Louis HARISMENDY & Kylian SALOMON
  */
 public class FullBlock extends Block{
-    
-    public FullBlock(){
-    super(false);
+
+    public FullBlock(boolean canBeTravel, int generationRate) {
+        super(canBeTravel, generationRate);
     }
+    
+    
     
     boolean canBeMined;
 }
