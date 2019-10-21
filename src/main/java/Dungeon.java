@@ -11,6 +11,14 @@
 public class Dungeon {
     private int SIZEX, SIZEY;
     private Bloc room[][] = new Bloc[SIZEX][SIZEY];
+
+    public Dungeon(int SIZEX, int SIZEY) {
+        this.SIZEX = SIZEX;
+        this.SIZEY = SIZEY;
+    }
+
+    
+    
     
     public void printDungeon(){
         for(int i=0;i<SIZEY;i++){
