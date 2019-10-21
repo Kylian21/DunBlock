@@ -9,6 +9,10 @@
  * @author Kylian Salomon
  */
 public class CharacterBloc extends Bloc{
+    
+    int healthPoint​;
+    int[] attack​;
+    String name ;
 
     public CharacterBloc(int healthPoint, int[] attack, String name, Point position) {
         super(position);
@@ -16,11 +20,6 @@ public class CharacterBloc extends Bloc{
         this.attack = attack;
         this.name = name;
     }
-
-  
-    int healthPoint​;
-    int[] attack​;
-    String name ;
     
     public boolean isAlive(int healthPoint){
         return (healthPoint<0);

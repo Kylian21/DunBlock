@@ -8,11 +8,16 @@
  *
  * @author Louis HARISMENDY
  */
-public class Monster extends CharacterBloc{
-
-    public Monster(int healthPoint, int[] attack, String name, Point position) {
-        super(healthPoint, attack, name, position);
-    }
+public class MonsterBloc extends CharacterBloc{
     
     Mineral mineralType;
+
+    public MonsterBloc(int healthPoint, int[] attack, String name, Point position) {
+        super(healthPoint, attack, name, position);
+    }
+
+    @Override
+    public String toString() {
+        return "M";
+    }
 }
