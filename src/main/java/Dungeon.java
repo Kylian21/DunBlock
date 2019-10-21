@@ -10,7 +10,7 @@
  */
 public class Dungeon {
     private int SIZEX, SIZEY;
-    private Block room[][] = new Block[SIZEX][SIZEY];
+    private Bloc room[][] = new Bloc[SIZEX][SIZEY];
     
     public void printDungeon(){
         for(int i=0;i<SIZEY;i++){
