@@ -8,16 +8,15 @@
  *
  * @author Louis HARISMENDY & Kylian SALOMON
  */
-public class HeroBloc extends CharacterBloc{
+public class Hero extends Character{
     
-    int lingots;
-    Tool[] Inventory;
+    private int lingots;
+    private Tool[] Inventory;
 
-    public HeroBloc(int lingots, Tool[] Inventory, int healthPoint, int[] attack, String name, Point position) {
-        super(healthPoint, attack, name, position);
-        this.lingots = lingots;
-        this.Inventory = Inventory;
+    public Hero(Point position,int healthPoint, int[] attack, String name) {
+        super(position,healthPoint,name,attack);
     }
+
     
     void move (Point toPosition){
         super.setPosition(toPosition);

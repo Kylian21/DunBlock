@@ -8,11 +8,11 @@
  *
  * @author Kylian Salomon
  */
-public class ChestBloc extends InteractiveBloc {
+public class ChestBloc extends Bloc {
     Tool randomTool;
 
     public ChestBloc(Tool randomTool, Character character, Point position) {
-        super(7, character, position);
+        super(position);
         this.randomTool = randomTool;
     }
     

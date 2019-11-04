@@ -9,10 +9,17 @@
  * @author Kylian Salomon
  */
 public class Tool {
-    Mineral MineralType;
+    private final Mineral MineralType = randomMineral();
+    
+    public Mineral randomMineral(){
+       double randomNumber = Math.random()*(100);
+       if(randomNumber<=10)return Mineral.Diamond;
+       else if(randomNumber<=40)return Mineral.Gold;
+       else return Mineral.Iron;
+    }
 
-    public Tool(Mineral MineralType) {
-        this.MineralType = MineralType;
+    public Mineral getMineralType() {
+        return MineralType;
     }
     
     

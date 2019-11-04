@@ -8,13 +8,15 @@
  *
  * @author Louis HARISMENDY
  */
-public class MonsterBloc extends CharacterBloc{
+public class Monster extends Character{
     
     private final Mineral mineralType = randomMineral();
 
-    public MonsterBloc(int healthPoint, int[] attack, String name, Point position) {
-        super(healthPoint, attack, name, position);
+    public Monster(Point position,int healthPoint, String name,int[] attack) {
+        super(position,healthPoint,name,attack);
+        
     }
+
     
     public Mineral randomMineral(){
        double randomNumber = Math.random()*(100);

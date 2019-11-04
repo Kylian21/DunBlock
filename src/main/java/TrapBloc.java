@@ -8,12 +8,17 @@
  *
  * @author Kylian Salomon
  */
-public class TrapBloc extends InteractiveBloc {
-    private final int attack[];
+public class TrapBloc extends Bloc {
+    private final int[] attack = new int[6];
 
-    public TrapBloc(int[] attack, Character character, Point position) {
-        super(5, character, position);
-        this.attack = attack;
+    public TrapBloc(Point position) {
+        super(position);
+        this.attack[0] = 2;
+        this.attack[1] = 2;
+        this.attack[2] = 4;
+        this.attack[3] = 6;
+        this.attack[4] = 6;
+        this.attack[5] = 6;
     }
 
     @Override

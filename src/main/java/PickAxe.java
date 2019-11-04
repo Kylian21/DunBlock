@@ -8,6 +8,9 @@
  *
  * @author Kylian Salomon
  */
-public class PickAxe {
+public class PickAxe extends Tool{
     
+    public void breakMineralBloc(MineralBloc bloc){
+        bloc.setBlocMined(true);
+    }
 }

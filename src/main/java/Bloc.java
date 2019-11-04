@@ -8,6 +8,7 @@
  */
 public class Bloc {
     private Point position;
+    Character character;
 
     public Bloc(Point position) {
         this.position = position;
@@ -19,6 +20,10 @@ public class Bloc {
 
     public void setPosition(Point position) {
         this.position = position;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
     }
     
 }

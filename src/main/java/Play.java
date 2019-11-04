@@ -8,8 +8,8 @@
  *
  * @author Kylian Salomon
  */
-public class main {
+public class Play {
+    public static void main(String[] args){
     Dungeon donjon = new Dungeon(20,20);
-    
-    
+  }
 }

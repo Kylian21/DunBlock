@@ -8,18 +8,25 @@
  *
  * @author Kylian Salomon
  */
-public class CharacterBloc extends Bloc{
+public class Character{
     
+    Point position;
     int healthPoint​;
     int[] attack​;
     String name ;
 
-    public CharacterBloc(int healthPoint, int[] attack, String name, Point position) {
-        super(position);
+    public Character(Point position,int healthPoint,String name,int[] attack) {
+        this.position = position;
         this.healthPoint = healthPoint;
         this.attack = attack;
         this.name = name;
     }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+    
     
     public boolean isAlive(int healthPoint){
         return (healthPoint<0);
