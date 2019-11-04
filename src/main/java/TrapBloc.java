@@ -8,7 +8,7 @@
  *
  * @author Kylian Salomon
  */
-public class TrapBloc extends Bloc {
+public class TrapBloc extends Bloc implements Damager{
     private final int[] attack = new int[6];
 
     public TrapBloc(Point position) {
@@ -23,7 +23,7 @@ public class TrapBloc extends Bloc {
 
     @Override
     public String toString() {
-        return " ";
+        return "=";
     }
 
     

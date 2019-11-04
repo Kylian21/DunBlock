@@ -8,7 +8,7 @@
  */
 public class Bloc {
     private Point position;
-    Character character;
+    private Character character;
 
     public Bloc(Point position) {
         this.position = position;
@@ -26,4 +26,9 @@ public class Bloc {
         this.character = character;
     }
     
+    @Override
+    public String toString() {
+        if(this.character instanceof Monster){return "M";}
+        else return " ";
+    }
 }

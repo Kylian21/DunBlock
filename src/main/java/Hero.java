@@ -13,15 +13,21 @@ public class Hero extends Character{
     private int lingots;
     private Tool[] Inventory;
 
-    public Hero(Point position,int healthPoint, int[] attack, String name) {
-        super(position,healthPoint,name,attack);
+    public Hero(Point position,int healthPoint, String name) {
+        super(position,healthPoint,name);
+        super.setAttack(setHeroAttack());
     }
 
     
-    void move (Point toPosition){
+    public void move (Point toPosition){
         super.setPosition(toPosition);
     }
-
+    
+    public int[] setHeroAttack(){
+        int [] heroAttack = new int[6];
+        for(int i=0;i<6;i++){heroAttack[i]=i+2;}
+        return heroAttack;
+    }
     @Override
     public String toString() {
         return "H";

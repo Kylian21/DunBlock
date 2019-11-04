@@ -12,13 +12,12 @@ public class Character{
     
     Point position;
     int healthPoint​;
-    int[] attack​;
+    int[] attack​ = new int[6];
     String name ;
 
-    public Character(Point position,int healthPoint,String name,int[] attack) {
+    public Character(Point position,int healthPoint,String name) {
         this.position = position;
         this.healthPoint = healthPoint;
-        this.attack = attack;
         this.name = name;
     }
 
@@ -26,7 +25,9 @@ public class Character{
         this.position = position;
     }
 
-    
+    public void setAttack(int[] attack) {
+        this.attack = attack;
+    }
     
     public boolean isAlive(int healthPoint){
         return (healthPoint<0);

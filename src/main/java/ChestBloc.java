@@ -9,12 +9,28 @@
  * @author Kylian Salomon
  */
 public class ChestBloc extends Bloc {
-    Tool randomTool;
+    Tool randomTool = randomTool();
 
-    public ChestBloc(Tool randomTool, Character character, Point position) {
+    public ChestBloc(Character character, Point position) {
         super(position);
-        this.randomTool = randomTool;
     }
     
+    public Tool randomTool(){
+        
+        double _randomNumber = Math.random()*(100);
+        if(_randomNumber<=50){
+            Sword sword = new Sword();
+            return sword;
+        } 
+        else{
+            PickAxe pickaxe = new PickAxe();
+            return pickaxe;
+        }
+    }
+    
+    @Override
+    public String toString() {
+        return "@";
+    }
     
 }

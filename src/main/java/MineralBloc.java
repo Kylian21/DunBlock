@@ -8,7 +8,7 @@
  *
  * @author Louis HARISMENDY & Kylian SALOMON
  */
-public class MineralBloc extends Bloc {
+public class MineralBloc extends Bloc implements LingotDrop{
     
     private final Mineral mineralType;
     private boolean blocMined;

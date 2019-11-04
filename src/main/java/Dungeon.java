@@ -10,14 +10,15 @@
  */
 public class Dungeon {
     private int SIZEX, SIZEY;
-    private Bloc[][] room = new Bloc[SIZEY][SIZEX];
+    private Bloc[][] room;
     
 
     public Dungeon(int SIZEX, int SIZEY) {
         this.SIZEX = SIZEX;
         this.SIZEY = SIZEY;
-        dungeonGenerator();
+        this.room = new Bloc [SIZEX][SIZEY];
     }
+    
     public void dungeonGenerator(){
         for(int i=0;i<SIZEY;i++){
             for(int k=0;k<SIZEX;k++){
@@ -38,11 +39,11 @@ public class Dungeon {
             return trap;
         }
         else if(randomNumber<=12){//7% chance to have a ChestBloc
-            ChestBloc chest = new ChestBloc(randomTool(), null, position);
+            ChestBloc chest = new ChestBloc(null, position);
             return chest;
         }
         else if(randomNumber<=19){//7% chance to have a monster in a bloc
-            Monster monster= new Monster(position, 30,"spider",setMonsterAttack());
+            Monster monster= new Monster(position, 30,"spider");
             Bloc blocWithMonster = new Bloc(position);
             blocWithMonster.setCharacter(monster);
             return blocWithMonster;
@@ -57,35 +58,30 @@ public class Dungeon {
         }
     }
     
-    public Tool randomTool(){
-        
-        double _randomNumber = Math.random()*(100);
-        if(_randomNumber<=50){
-            Sword sword = new Sword();
-            return sword;
-        } 
-        else{
-            PickAxe pickaxe = new PickAxe();
-            return pickaxe;
-        }
-    }
     
     public void printDungeon(){
         for(int i=0;i<SIZEY;i++){
+            if(i==0){
+                for(int z=0;z<SIZEX*2+2;z++){
+                    System.out.print("-");
+                }
+                System.out.println();
+            }
+            
+            System.out.print("|");
             for(int k=0;k<SIZEX;k++){
-                System.out.println(this.room[k][i]);
+                System.out.print(this.room[k][i]);
+                System.out.print(" ");
+            }
+            System.out.print("|");
+            System.out.println();
+            if(i==SIZEY-1){
+                for(int z=0;z<SIZEX*2+2;z++){
+                    System.out.print("-");
+                }
             }
         }
     }
     
-    public int[] setMonsterAttack(){
-        int[] monsterAttackPoint = new int[6];
-        monsterAttackPoint[0] = 1;
-        monsterAttackPoint[1] = 2;
-        monsterAttackPoint[2] = 3;
-        monsterAttackPoint[3] = 4;
-        monsterAttackPoint[4] = 5;
-        monsterAttackPoint[5] = 6;
-        return monsterAttackPoint;
-    }
+    
 }

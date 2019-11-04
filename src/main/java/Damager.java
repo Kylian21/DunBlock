@@ -8,11 +8,6 @@
  *
  * @author Kylian Salomon
  */
-public class Play {
-    public static void main(String[] args){
-    Dungeon donjon = new Dungeon(5,5);
-    donjon.dungeonGenerator();
-    donjon.printDungeon();
-    
-  }
+public interface Damager {
+    public void dealDamage(int attack, Hero hero);
 }
