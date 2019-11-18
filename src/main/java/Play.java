@@ -14,6 +14,8 @@ import java.util.Scanner;
  */
 public class Play {
     public static void main(String[] args){
+        Scanner keyboard = new Scanner(System.in);
+        Bloc[] listOfChoice = new Bloc[4];
         boolean END = false;
         Dungeon donjon = new Dungeon(5,5);
         Point position = new Point(0,0);
@@ -22,22 +24,44 @@ public class Play {
         while(!END){
             donjon.printDungeon();
             hero.printHeroInfo();
+            listOfChoice = possibilities(hero,donjon);
+            System.out.println("Entrez votre choix : ");
+            String choice = keyboard.nextLine();
             break;
         }
+            
   }
    
-    public Point[] possibilities(Hero hero, Dungeon donjon){
-        Point [] choiceList = new Point[4];
+    public static Bloc[] possibilities(Hero hero, Dungeon donjon){
+        char keyboardList[]  = {'U','D','L','R'};
+        Bloc [] blocList = new Bloc[4];
         Point positionUp = new Point(hero.position.getX(),hero.position.getY()-1);
         Point positionDown = new Point(hero.position.getX(),hero.position.getY()+1);
         Point positionLeft = new Point(hero.position.getX()-1,hero.position.getY());
         Point positionRight = new Point(hero.position.getX()+1,hero.position.getY());
-        choiceList[0]=positionUp;
-        choiceList[1]=positionDown;
-        choiceList[2]=positionLeft;
-        choiceList[3]=positionRight;
+       
+        blocList[0]=donjon.getBloc(positionUp);
+        blocList[1]=donjon.getBloc(positionDown);
+        blocList[2]=donjon.getBloc(positionLeft);
+        blocList[3]=donjon.getBloc(positionRight);
+        System.out.println();
+        for (int i=0;i<4;i++){
+           if(blocList[i] == null){System.out.println(keyboardList[i]+" : Vous ne pouvez pas aller dans cette direction !");}
+           else if(blocList[i] instanceof MineralBloc){
+               MineralBloc tmp = (MineralBloc) blocList[i];
+               if(!tmp.isBlocMined()){
+                System.out.println(keyboardList[i]+" : Vous pouvez miner un bloc de "+tmp.getMineralType()+" ?");
+               }
+               else System.out.println(keyboardList[i]+" : Le minerai a déja été miné, vous pouvez aller dans cette direction !");
+           }
+           else if(blocList[i].getCharacter()!= null){System.out.println(keyboardList[i]+" : Affronter le monstre ?");}
+           else if(blocList[i] instanceof ChestBloc){
+               System.out.println("You found a chest, Open it ?");
+           }
+           else{System.out.println(keyboardList[i]+" : Vous pouvez aller dans cette direction !");}
+        }
         
-        return choiceList;
+        return blocList;
     }
     
     public static String newHero(){

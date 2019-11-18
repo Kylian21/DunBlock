@@ -9,7 +9,7 @@
  * @author Kylian Salomon
  */
 public enum Mineral {
-    Gold(),
     Iron(),
+    Gold(),
     Diamond();
 }

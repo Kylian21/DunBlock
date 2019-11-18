@@ -15,17 +15,29 @@ public class MineralBloc extends Bloc implements LingotDrop{
 
     public MineralBloc(Point position) {
         super(position);
-        this.blocMined=true;
+        this.blocMined=false;
     }
  
     public void setBlocMined(boolean blocMined) {
         this.blocMined = blocMined;
     }
     
+    public Mineral getMineralType() {
+        return mineralType;
+    }
+
+    public boolean isBlocMined() {
+        return blocMined;
+    }
+    
     @Override
     public String toString() {
-        return "*";
+        if(this.blocMined){return " ";}
+        else return "*";
+        
     }
+
+    
     
     
     

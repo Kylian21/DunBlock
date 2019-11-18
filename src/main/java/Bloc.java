@@ -25,7 +25,10 @@ public class Bloc {
     public void setCharacter(Character character) {
         this.character = character;
     }
-    
+
+    public Character getCharacter() {
+        return character;
+    }
     @Override
     public String toString() {
         if(this.character instanceof Monster){return "M";}
