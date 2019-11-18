@@ -10,7 +10,7 @@
  */
 public class Hero extends Character{
     
-    private int lingots;
+    private int[] lingots = new int[3];
     private Tool[] Inventory;
 
     public Hero(Point position,int healthPoint, String name) {
@@ -27,6 +27,12 @@ public class Hero extends Character{
         int [] heroAttack = new int[6];
         for(int i=0;i<6;i++){heroAttack[i]=i+2;}
         return heroAttack;
+    }
+    
+    public void printHeroInfo(){
+        System.out.println();
+        System.out.println(this.name+" HP = "+this.healthPoint+" PV "+"LINGOT : ");
+        System.out.println("IRON : "+this.lingots[0]+" GOLD : "+this.lingots[1]+" DIAMOND : "+this.lingots[2]);
     }
     @Override
     public String toString() {

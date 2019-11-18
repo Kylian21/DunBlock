@@ -1,5 +1,6 @@
 
 import java.util.Random;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,12 +14,16 @@ import java.util.Random;
  */
 public class Play {
     public static void main(String[] args){
-        boolean FLAG = false;
+        boolean END = false;
         Dungeon donjon = new Dungeon(5,5);
         Point position = new Point(0,0);
-        final Hero hero = new Hero(position, 30, "Garry");
-        donjon.dungeonGenerator(hero);      
-        
+        Hero hero = new Hero(position, 30, newHero());
+        donjon.dungeonGenerator(hero);
+        while(!END){
+            donjon.printDungeon();
+            hero.printHeroInfo();
+            break;
+        }
   }
    
     public Point[] possibilities(Hero hero, Dungeon donjon){
@@ -33,6 +38,26 @@ public class Play {
         choiceList[3]=positionRight;
         
         return choiceList;
+    }
+    
+    public static String newHero(){
+        String heroName;
+        Scanner nameInput = new Scanner(System.in);
+        System.out.println("WELCOME TO DUNBLOCK !");
+        System.out.println("ENTER YOUR INITIALS");
+        while(true){
+            heroName=nameInput.nextLine();
+            try{
+                if(heroName.length()<=3){
+                    System.out.println("WELCOME "+heroName+" !");
+                    break;
+                }
+                else throw new Exception("INITIALS LENGTH MUST BE UNDER 3");
+            }catch (Exception err){
+                System.out.println("ERROR : "+err.getMessage());
+            }
+        }
+        return heroName;
     }
     
     public static void attackaMonster(Monster monster,Hero hero){
@@ -53,5 +78,5 @@ public class Play {
         else if(hero.healthPoint<=0){
             System.out.println("YOU ARE DEAD");
         }
-    }    
+    }
 }   

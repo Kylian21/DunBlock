@@ -15,7 +15,7 @@ public interface LingotDrop {
        else if(randomNumber<=40)return Mineral.Gold;
        else return Mineral.Iron;
     }
-    default int dropLingot(Mineral mineralsType,Hero hero){
+    default int dropLingot(Mineral mineralsType){
         double _randomNumber = (Math.random()*(2))+1;
         return (int)_randomNumber;
     }
