@@ -29,6 +29,7 @@ public class Bloc {
     @Override
     public String toString() {
         if(this.character instanceof Monster){return "M";}
+        else if(this.character instanceof Hero){return "H";}
         else return " ";
     }
 }

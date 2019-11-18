@@ -11,7 +11,6 @@
 public class Dungeon {
     private int SIZEX, SIZEY;
     private Bloc[][] room;
-    
 
     public Dungeon(int SIZEX, int SIZEY) {
         this.SIZEX = SIZEX;
@@ -19,21 +18,24 @@ public class Dungeon {
         this.room = new Bloc [SIZEX][SIZEY];
     }
     
-    public void dungeonGenerator(){
+    public void dungeonGenerator(Hero hero){
         for(int i=0;i<SIZEY;i++){
             for(int k=0;k<SIZEX;k++){
-                Point position = new Point();
-                position.setX(k);
-                position.setY(i);
-                this.room[i][k] = blocGenerator(position);
+                Point position = new Point(k,i);
+                this.room[i][k] = blocGenerator(position,hero);
             }
         }
     }
     
     
-    public Bloc blocGenerator(Point position){
+    public Bloc blocGenerator(Point position,Hero hero){
         double randomNumber = Math.random()*(100);       
-                
+        
+        if(position.getX()==0 && position.getY()==0){
+            Bloc blocWithHero = new Bloc(position);
+            blocWithHero.setCharacter(hero);
+            return blocWithHero;
+        }
         if (randomNumber<=5){//5% chance to have a Trapbloc
             TrapBloc trap = new TrapBloc(position);
             return trap;
@@ -83,5 +85,9 @@ public class Dungeon {
         }
     }
     
+    public Bloc getBloc(Point position){
+        if (position.getX()<0 || position.getX()>=SIZEX || position.getY()<0 || position.getY()>=SIZEY){return null;}
+        else return this.room[(int)position.getX()][(int)position.getY()];
+    }
     
 }

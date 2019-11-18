@@ -20,7 +20,10 @@ public class TrapBloc extends Bloc implements Damager{
         this.attack[4] = 6;
         this.attack[5] = 6;
     }
-
+    @Override
+    public void dealDamage(int attack, Hero hero){
+        hero.healthPoint -= attack;
+    }
     @Override
     public String toString() {
         return "=";

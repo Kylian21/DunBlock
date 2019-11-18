@@ -9,5 +9,7 @@
  * @author Kylian Salomon
  */
 public interface Damager {
-    public void dealDamage(int attack, Hero hero);
+    default void dealDamage(int attack, Hero hero){
+        hero.healthPoint -= attack;
+    }
 }

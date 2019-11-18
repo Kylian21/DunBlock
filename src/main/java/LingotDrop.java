@@ -9,6 +9,14 @@
  * @author Kylian Salomon
  */
 public interface LingotDrop {
-    public Mineral randomMineral();
-    public int dropLingot(Mineral mineralsType,Hero hero);
+    default Mineral randomMineral(){
+        double randomNumber = Math.random()*(100);
+       if(randomNumber<=10)return Mineral.Diamond;
+       else if(randomNumber<=40)return Mineral.Gold;
+       else return Mineral.Iron;
+    }
+    default int dropLingot(Mineral mineralsType,Hero hero){
+        double _randomNumber = (Math.random()*(2))+1;
+        return (int)_randomNumber;
+    }
 }
