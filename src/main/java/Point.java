@@ -31,5 +31,10 @@ public class Point {
     public void setY(float value){
         this.y = value;
     }
+
+    @Override
+    public String toString() {
+        return "Point{" + "x=" + x + ", y=" + y + '}';
+    }
     
 }

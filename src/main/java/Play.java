@@ -21,13 +21,29 @@ public class Play {
         Point position = new Point(0,0);
         Hero hero = new Hero(position, 30, newHero());
         donjon.dungeonGenerator(hero);
+        
         while(!END){
             donjon.printDungeon();
             hero.printHeroInfo();
+            System.out.println(hero.position);
             listOfChoice = possibilities(hero,donjon);
             System.out.println("Entrez votre choix : ");
             String choice = keyboard.nextLine();
-            break;
+            switch(choice.charAt(0)){
+                case'U':
+                    action(hero,listOfChoice[0],donjon.getBloc(hero.position));
+                    break;
+                case'D':
+                    action(hero,listOfChoice[1],donjon.getBloc(hero.position));
+                    break;
+                case'L':
+                    action(hero,listOfChoice[2],donjon.getBloc(hero.position));
+                    break;
+                case'R':
+                    action(hero,listOfChoice[3],donjon.getBloc(hero.position));
+                    break;
+            }
+            
         }
             
   }
@@ -56,12 +72,36 @@ public class Play {
            }
            else if(blocList[i].getCharacter()!= null){System.out.println(keyboardList[i]+" : Affronter le monstre ?");}
            else if(blocList[i] instanceof ChestBloc){
-               System.out.println("You found a chest, Open it ?");
+               System.out.println(keyboardList[i]+"You found a chest, Open it ?");
            }
            else{System.out.println(keyboardList[i]+" : Vous pouvez aller dans cette direction !");}
         }
         
         return blocList;
+    }
+    
+    public static void action(Hero hero, Bloc bloc, Bloc oldBloc){
+        if(bloc == null){System.out.println("You shall not pass");}
+        else if(bloc instanceof MineralBloc){
+            MineralBloc tmp = (MineralBloc) bloc;
+            if(!tmp.isBlocMined()){
+               tmp.dropLingot(tmp.getMineralType(), hero);
+               tmp.setBlocMined(true);
+            }
+            else{
+                hero.move(bloc.getPosition());
+                bloc.setCharacter(hero);
+                oldBloc.setCharacter(null);
+            }
+        }
+        else if(bloc instanceof ChestBloc){
+            
+        }
+        else{
+            hero.move(bloc.getPosition());
+            bloc.setCharacter(hero);
+            oldBloc.setCharacter(null);
+        }
     }
     
     public static String newHero(){

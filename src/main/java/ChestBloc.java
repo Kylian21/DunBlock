@@ -27,6 +27,10 @@ public class ChestBloc extends Bloc {
             return pickaxe;
         }
     }
+
+    public Tool getRandomTool() {
+        return randomTool;
+    }
     
     @Override
     public String toString() {

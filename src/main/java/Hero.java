@@ -34,6 +34,11 @@ public class Hero extends Character{
         System.out.println(this.name+" HP = "+this.healthPoint+" PV "+"LINGOT : ");
         System.out.println("IRON : "+this.lingots[0]+" GOLD : "+this.lingots[1]+" DIAMOND : "+this.lingots[2]);
     }
+    
+    public void setLingot(int value, int index){
+        this.lingots[index]= value;
+    }
+    
     @Override
     public String toString() {
         return "H";
