@@ -11,6 +11,7 @@
 public class Dungeon {
     private int SIZEX, SIZEY;
     private Bloc[][] room;
+    private int monsterNumber =0;
 
     public Dungeon(int SIZEX, int SIZEY) {
         this.SIZEX = SIZEX;
@@ -45,7 +46,16 @@ public class Dungeon {
             return chest;
         }
         else if(randomNumber<=19){//7% chance to have a monster in a bloc
-            Monster monster= new Monster(position, 30,"spider");
+            String[] monsters = null;
+            try{
+                monsters = ReadTextAsString.readFileAsString().split(System.getProperty("line.separator"));
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
+            String[] monsterElement = monsters[0].split(",");
+            Monster monster= new Monster(position, monsterElement[0],Integer.parseInt(monsterElement[1]));
+            //set attack code
             Bloc blocWithMonster = new Bloc(position);
             blocWithMonster.setCharacter(monster);
             return blocWithMonster;

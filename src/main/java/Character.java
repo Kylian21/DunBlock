@@ -15,7 +15,7 @@ public class Character{
     int[] attack​ = new int[6];
     String name ;
 
-    public Character(Point position,int healthPoint,String name) {
+    public Character(Point position,String name,int healthPoint) {
         this.position = position;
         this.healthPoint = healthPoint;
         this.name = name;

@@ -19,7 +19,7 @@ public class Play {
         boolean END = false;
         Dungeon donjon = new Dungeon(5,5);
         Point position = new Point(0,0);
-        Hero hero = new Hero(position, 30, newHero());
+        Hero hero = new Hero(position, 50, newHero());
         donjon.dungeonGenerator(hero);
         
         while(!END){
@@ -64,6 +64,7 @@ public class Play {
         System.out.println();
         for (int i=0;i<4;i++){
            Bloc tmp = donjon.getBloc(blocList[i]);
+           
            if(tmp == null){System.out.println(keyboardList[i]+" : Vous ne pouvez pas aller dans cette direction !");}
            
            else if(tmp instanceof MineralBloc){
@@ -74,7 +75,7 @@ public class Play {
            }
            
            else if(tmp instanceof ChestBloc){
-               if(!((ChestBloc)tmp).isEmptyChest()){
+               if(((ChestBloc)tmp).isEmptyChest()){
                    System.out.println(keyboardList[i]+" : The chest is already open !");
                }
                else{
@@ -119,6 +120,9 @@ public class Play {
             if(result){
                 bloc.setCharacter(null);
             }
+        }
+        else if(bloc instanceof TrapBloc){
+            
         }
         else{
             hero.move(bloc.getPosition());

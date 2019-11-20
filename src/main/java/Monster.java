@@ -12,8 +12,8 @@ public class Monster extends Character implements Damager,LingotDrop{
     
     private final Mineral mineralType = randomMineral();
     
-    public Monster(Point position,int healthPoint, String name) {
-        super(position,healthPoint,name);
+    public Monster(Point position,String name,int healtPoint) {
+        super(position,name,healtPoint);
         super.setAttack(setMonsterAttack());
     }    
     
