@@ -20,6 +20,10 @@ public class Monster extends Character implements LingotDrop{
     public final void setAttack(int[] attacktmp){
         System.arraycopy(attacktmp, 0, super.attack, 0, attacktmp.length);
     }
+
+    public Mineral getMineralType() {
+        return mineralType;
+    }
     
     @Override
     public String toString() {

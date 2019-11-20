@@ -13,4 +13,9 @@ public class PickAxe extends Tool{
     public void breakMineralBloc(MineralBloc bloc){
         bloc.setBlocMined(true);
     }
+
+    @Override
+    public String toString() {
+        return super.getMineralType()+"PickAxe";
+    }
 }

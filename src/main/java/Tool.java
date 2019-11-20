@@ -21,6 +21,4 @@ public class Tool {
     public Mineral getMineralType() {
         return MineralType;
     }
-    
-    
 }

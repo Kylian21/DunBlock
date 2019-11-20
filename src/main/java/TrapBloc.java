@@ -11,15 +11,11 @@
 public class TrapBloc extends Bloc implements Damager{
     
     private int [] attack = new int[6];
+    public boolean activated = false;
 
     public TrapBloc(Point position) {
         super(position);
         setAttack(this.attack);
-    }
-    
-    @Override
-    public String toString() {
-        return "=";
     }
     
     @Override
@@ -37,4 +33,16 @@ public class TrapBloc extends Bloc implements Damager{
         return this.attack;
     }
     
+    @Override
+    public String toString() {
+        if(super.getCharacter() instanceof Hero){
+            return "H";
+        }
+        else if(activated){
+            return "=";
+        }
+        else{
+            return "x";
+        }
+    }
 }

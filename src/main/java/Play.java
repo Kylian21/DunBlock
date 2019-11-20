@@ -27,7 +27,7 @@ public class Play {
             hero.printHeroInfo();
             System.out.println(hero.position);
             listOfChoice = possibilities(hero,donjon);
-            System.out.println("Entrez votre choix : ");
+            System.out.println("ENTER YOUR CHOICE : (I for inventory)");
             String choice = keyboard.nextLine();
             
             switch(choice.charAt(0)){
@@ -42,6 +42,9 @@ public class Play {
                     break;
                 case'R':
                     action(hero,donjon.getBloc(listOfChoice[3]),donjon.getBloc(hero.position));
+                    break;
+                case'I':
+                    System.out.println("INVENTORY :");
                     break;
             }
             
@@ -65,13 +68,13 @@ public class Play {
         for (int i=0;i<4;i++){
            Bloc tmp = donjon.getBloc(blocList[i]);
            
-           if(tmp == null){System.out.println(keyboardList[i]+" : Vous ne pouvez pas aller dans cette direction !");}
+           if(tmp == null){System.out.println(keyboardList[i]+" : You can't go this way !");}
            
            else if(tmp instanceof MineralBloc){
                if(!((MineralBloc)tmp).isBlocMined()){
-                System.out.println(keyboardList[i]+" : Vous pouvez miner un bloc de "+((MineralBloc)tmp).getMineralType()+" ?");
+                System.out.println(keyboardList[i]+" : You can mine a bloc of "+((MineralBloc)tmp).getMineralType()+" ?");
                }
-               else System.out.println(keyboardList[i]+" : Le minerai a déja été miné, vous pouvez aller dans cette direction !");
+               else System.out.println(keyboardList[i]+" : You already mined this bloc, you can go this way !");
            }
            
            else if(tmp instanceof ChestBloc){
@@ -85,8 +88,7 @@ public class Play {
            else if(tmp.getCharacter() instanceof Monster){
                System.out.println(keyboardList[i]+" : Do you want to fight the "+tmp.getCharacter().name+" ?");
            }
-           
-           else{System.out.println(keyboardList[i]+" : Vous pouvez aller dans cette direction !");}
+           else{System.out.println(keyboardList[i]+" : You can go this way !");}
         }
         
         return blocList;
@@ -124,7 +126,15 @@ public class Play {
             }
         }
         else if(bloc instanceof TrapBloc){
-            
+            hero.move(bloc.getPosition());
+            bloc.setCharacter(hero);
+            oldBloc.setCharacter(null);
+            if (!((TrapBloc) bloc).activated){
+                boolean result = trapped((TrapBloc)bloc,hero);
+                if(result){
+                    ((TrapBloc) bloc).activated=true;
+                }
+            }
         }
         else{
             hero.move(bloc.getPosition());
@@ -162,11 +172,22 @@ public class Play {
         }
         if(monster.healthPoint<=0){
             System.out.println("YOU KILL THE MONSTER");
+            monster.dropLingot(monster.getMineralType(), hero);
             return true;
         }
         else{
             System.out.println("YOU ARE DEAD");
             return false;
         }
+    }
+    
+    public static boolean trapped(TrapBloc trap,Hero hero){
+        trap.attackaCharacter(hero, trap.getAttack());
+        System.out.println("YOU HAVE BEEN TRAPPED");
+        if(hero.healthPoint<=0){
+            System.out.println("YOU ARE DEAD");
+            return false;
+        }
+        return true;
     }
 }   

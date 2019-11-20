@@ -52,7 +52,7 @@ public class Dungeon {
             String[] monsters = null;
             int[] tmpAttack = new int[6];
             try{
-                monsters = ReadTextAsString.readFileAsString().split(System.getProperty("line.separator"));
+                monsters = ReadTextAsString.readFileAsString().split("\n");
             }
             catch(Exception e){
                 System.out.println(e);

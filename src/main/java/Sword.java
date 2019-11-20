@@ -42,6 +42,9 @@ public class Sword extends Tool{
                 break;
         }
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return super.getMineralType()+"Sword :";
+    }
 }

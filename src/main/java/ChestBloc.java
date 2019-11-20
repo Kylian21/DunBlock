@@ -9,7 +9,7 @@
  * @author Kylian Salomon
  */
 public class ChestBloc extends Bloc {
-    Tool randomTool = randomTool();
+    private Tool randomTool = randomTool();
     boolean emptyChest = false;
 
     public ChestBloc(Character character, Point position) {

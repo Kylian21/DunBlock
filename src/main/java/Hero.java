@@ -12,7 +12,7 @@ import java.util.*;
 public class Hero extends Character{
     
     private int[] lingots = new int[3];
-    private List<Tool> item;
+    private List<Tool> item =new ArrayList<Tool>();
 
     public Hero(Point position,int healthPoint, String name) {
         super(position,name,healthPoint);
@@ -33,6 +33,10 @@ public class Hero extends Character{
         System.out.println();
         System.out.println(this.name+" HP = "+this.healthPoint+" PV "+"LINGOT : ");
         System.out.println("IRON : "+this.lingots[0]+" GOLD : "+this.lingots[1]+" DIAMOND : "+this.lingots[2]);
+    }
+    
+    public void printInventory(){
+        for(int i;i<item.size();i++){System.out.println(item.get(i)+" / ");}
     }
     
     public void setLingot(int value, int index){
