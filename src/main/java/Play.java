@@ -37,16 +37,16 @@ public class Play {
             try{
                 switch(choice.charAt(0)){
                     case'U':
-                        action(hero,donjon.getBloc(listOfChoice[0]),donjon.getBloc(hero.position));
+                        END=action(hero,donjon.getBloc(listOfChoice[0]),donjon.getBloc(hero.position));
                         break;
                     case'D':
-                        action(hero,donjon.getBloc(listOfChoice[1]),donjon.getBloc(hero.position));
+                        END=action(hero,donjon.getBloc(listOfChoice[1]),donjon.getBloc(hero.position));
                         break;
                     case'L':
-                        action(hero,donjon.getBloc(listOfChoice[2]),donjon.getBloc(hero.position));
+                        END=action(hero,donjon.getBloc(listOfChoice[2]),donjon.getBloc(hero.position));
                         break;
                     case'R':
-                        action(hero,donjon.getBloc(listOfChoice[3]),donjon.getBloc(hero.position));
+                        END=action(hero,donjon.getBloc(listOfChoice[3]),donjon.getBloc(hero.position));
                         break;
                     case'I':
                         System.out.println("INVENTORY :");
@@ -54,28 +54,7 @@ public class Play {
                         break;
                     default:
                         throw new Exception("INVALIDE INPUT ! ENTER U(up),D(down),L(left),R(right) or I(inventory).");
-                }
-=======
-            String choice = keyboard.nextLine();
-            
-            switch(choice.charAt(0)){
-                case'U':
-                    END=action(hero,donjon.getBloc(listOfChoice[0]),donjon.getBloc(hero.position));
-                    break;
-                case'D':
-                    END=action(hero,donjon.getBloc(listOfChoice[1]),donjon.getBloc(hero.position));
-                    break;
-                case'L':
-                    END=action(hero,donjon.getBloc(listOfChoice[2]),donjon.getBloc(hero.position));
-                    break;
-                case'R':
-                    END=action(hero,donjon.getBloc(listOfChoice[3]),donjon.getBloc(hero.position));
-                    break;
-                case'I':
-                    System.out.println("INVENTORY :");
-                    hero.printInventory();
-                    break;
->>>>>>> Stashed changes
+                }           
             }
             catch (Exception err){
                 System.out.println("ERROR : "+err.getMessage());
