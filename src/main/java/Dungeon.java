@@ -1,3 +1,6 @@
+
+import java.util.Arrays;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -47,15 +50,20 @@ public class Dungeon {
         }
         else if(randomNumber<=19){//7% chance to have a monster in a bloc
             String[] monsters = null;
+            int[] tmpAttack = new int[6];
             try{
                 monsters = ReadTextAsString.readFileAsString().split(System.getProperty("line.separator"));
             }
             catch(Exception e){
                 System.out.println(e);
             }
-            String[] monsterElement = monsters[0].split(",");
-            Monster monster= new Monster(position, monsterElement[0],Integer.parseInt(monsterElement[1]));
-            //set attack code
+            String[] monsterElement = monsters[monsterNumber%4].split(";");
+            for(int i=0;i<tmpAttack.length;i++){
+                String [] tmp = monsterElement[2].split(",");
+                tmpAttack[i]= Integer.parseInt(tmp[i]);
+            }
+            Monster monster= new Monster(position, monsterElement[0],Integer.parseInt(monsterElement[1]),tmpAttack);
+            monsterNumber++;
             Bloc blocWithMonster = new Bloc(position);
             blocWithMonster.setCharacter(monster);
             return blocWithMonster;

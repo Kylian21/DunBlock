@@ -16,6 +16,7 @@ public class Hero extends Character{
 
     public Hero(Point position,int healthPoint, String name) {
         super(position,name,healthPoint);
+        setAttack(super.attack);
     }
 
     
@@ -24,8 +25,8 @@ public class Hero extends Character{
     }
     
     @Override
-    public void setAttack(int[] attacktmp){
-        for(int i=0;i<attacktmp.length;i++){Hero.attack[i]=attacktmp[i]+2;}
+    public final void setAttack(int[] attacktmp){
+        for(int i=0;i<attacktmp.length;i++){attacktmp[i]=i+2;}
     }
     
     public void printHeroInfo(){

@@ -11,6 +11,7 @@
 public abstract class Character implements Damager{
     
     Point position;
+    int[] attack = new int[6];
     int healthPoint​;
     String name ;
 
@@ -30,4 +31,9 @@ public abstract class Character implements Damager{
     
     @Override
     public abstract void setAttack(int[] attack);
+    
+    @Override
+    public int[] getAttack(){
+        return this.attack;
+    }
 }

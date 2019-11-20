@@ -17,7 +17,7 @@ public class Play {
         Scanner keyboard = new Scanner(System.in);
         Point[] listOfChoice = new Point[4];
         boolean END = false;
-        Dungeon donjon = new Dungeon(5,5);
+        Dungeon donjon = new Dungeon(10,10);
         Point position = new Point(0,0);
         Hero hero = new Hero(position, 50, newHero());
         donjon.dungeonGenerator(hero);
@@ -82,7 +82,9 @@ public class Play {
                System.out.println(keyboardList[i]+" : You found a chest, Open it ?");}
            }
            
-           else if(tmp.getCharacter() instanceof Monster){System.out.println(keyboardList[i]+" : Affronter le monstre ?");}
+           else if(tmp.getCharacter() instanceof Monster){
+               System.out.println(keyboardList[i]+" : Do you want to fight the "+tmp.getCharacter().name+" ?");
+           }
            
            else{System.out.println(keyboardList[i]+" : Vous pouvez aller dans cette direction !");}
         }
@@ -153,7 +155,9 @@ public class Play {
     
     public static boolean attackaMonster(Monster monster,Hero hero){
         while(monster.healthPoint>0 && hero.healthPoint>0){
+            System.out.print(hero.name);
             hero.attackaCharacter(monster, hero.getAttack());
+            System.out.print(monster.name);
             monster.attackaCharacter(hero, monster.getAttack());
         }
         if(monster.healthPoint<=0){

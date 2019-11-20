@@ -9,24 +9,32 @@
  * @author Kylian Salomon
  */
 public class TrapBloc extends Bloc implements Damager{
+    
+    private int [] attack = new int[6];
 
     public TrapBloc(Point position) {
         super(position);
+        setAttack(this.attack);
     }
     
     @Override
     public String toString() {
         return "=";
     }
+    
+    @Override
+    public final void setAttack(int[] attack) {
+        attack[0] = 2;
+        attack[1] = 2;
+        attack[2] = 4;
+        attack[3] = 6;
+        attack[4] = 6;
+        attack[5] = 6;
+    }
 
     @Override
-    public void setAttack(int[] attack) {
-        TrapBloc.attack[0] = 2;
-        TrapBloc.attack[1] = 2;
-        TrapBloc.attack[2] = 4;
-        TrapBloc.attack[3] = 6;
-        TrapBloc.attack[4] = 6;
-        TrapBloc.attack[5] = 6;
+    public int[] getAttack() {
+        return this.attack;
     }
     
 }

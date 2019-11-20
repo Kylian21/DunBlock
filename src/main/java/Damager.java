@@ -12,18 +12,15 @@ import java.util.Random;
  * @author Kylian Salomon
  */
 public interface Damager {
-    static int[] attack = new int[6];
     abstract void setAttack(int[] attack);
     
-    default int[] getAttack(){
-        return this.attack;
-    }
+    abstract int[] getAttack();
     
-    default void attackaCharacter(Character charAttack,int[] attackArray){
+    default void attackaCharacter(Character charAttacked,int[] attackArray){
         Random rand=new Random();
         int rdmAttackHeroIndex=rand.nextInt(6);
-        charAttack.healthPoint-=attackArray[rdmAttackHeroIndex];
-        System.out.println(" ATTACK : -"+attackArray[rdmAttackHeroIndex]);
-        System.out.println(charAttack.name+"HP ="+charAttack.healthPoint);
+        charAttacked.healthPoint-=attackArray[rdmAttackHeroIndex];
+        System.out.println(" ATTACK : -"+attackArray[rdmAttackHeroIndex]+" HP");
+        System.out.println(charAttacked.name+" HP = "+charAttacked.healthPoint);
     }
 }
