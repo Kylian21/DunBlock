@@ -8,11 +8,10 @@
  *
  * @author Kylian Salomon
  */
-public class Character{
+public abstract class Character implements Damager{
     
     Point position;
     int healthPoint​;
-    int[] attack​ = new int[6];
     String name ;
 
     public Character(Point position,String name,int healthPoint) {
@@ -24,12 +23,11 @@ public class Character{
     public void setPosition(Point position) {
         this.position = position;
     }
-
-    public void setAttack(int[] attack) {
-        this.attack = attack;
-    }
     
     public boolean isAlive(int healthPoint){
         return (healthPoint<0);
     }
+    
+    @Override
+    public abstract void setAttack(int[] attack);
 }

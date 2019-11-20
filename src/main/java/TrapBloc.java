@@ -9,28 +9,24 @@
  * @author Kylian Salomon
  */
 public class TrapBloc extends Bloc implements Damager{
-    private final int[] attack = new int[6];
 
     public TrapBloc(Point position) {
         super(position);
-        this.attack[0] = 2;
-        this.attack[1] = 2;
-        this.attack[2] = 4;
-        this.attack[3] = 6;
-        this.attack[4] = 6;
-        this.attack[5] = 6;
     }
-    @Override
-    public void dealDamage(int attack, Hero hero){
-        hero.healthPoint -= attack;
-    }
+    
     @Override
     public String toString() {
         return "=";
     }
 
-    
-    
-    
+    @Override
+    public void setAttack(int[] attack) {
+        TrapBloc.attack[0] = 2;
+        TrapBloc.attack[1] = 2;
+        TrapBloc.attack[2] = 4;
+        TrapBloc.attack[3] = 6;
+        TrapBloc.attack[4] = 6;
+        TrapBloc.attack[5] = 6;
+    }
     
 }

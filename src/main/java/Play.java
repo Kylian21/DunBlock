@@ -152,16 +152,9 @@ public class Play {
     }
     
     public static boolean attackaMonster(Monster monster,Hero hero){
-        Random rand=new Random();
-        
         while(monster.healthPoint>0 && hero.healthPoint>0){
-            int rdmMonsterAttack=rand.nextInt(6);
-            int rdmHeroAttack=rand.nextInt(6);
-            monster.healthPoint-=hero.attack[rdmHeroAttack];
-            hero.healthPoint-=monster.attack[rdmMonsterAttack];
-            System.out.println(hero.attack[rdmHeroAttack]);
-            System.out.println(monster.name+"HP ="+monster.healthPoint);
-            System.out.println(hero.name+"HP ="+hero.healthPoint);
+            hero.attackaCharacter(monster, hero.getAttack());
+            monster.attackaCharacter(hero, monster.getAttack());
         }
         if(monster.healthPoint<=0){
             System.out.println("YOU KILL THE MONSTER");

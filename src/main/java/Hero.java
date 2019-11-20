@@ -15,8 +15,8 @@ public class Hero extends Character{
     private List<Tool> item;
 
     public Hero(Point position,int healthPoint, String name) {
+        super(position,healthPoint,name);
         super(position,name,healthPoint);
-        super.setAttack(setHeroAttack());
     }
 
     
@@ -24,10 +24,9 @@ public class Hero extends Character{
         super.setPosition(toPosition);
     }
     
-    public int[] setHeroAttack(){
-        int [] heroAttack = new int[6];
-        for(int i=0;i<6;i++){heroAttack[i]=i+2;}
-        return heroAttack;
+    @Override
+    public void setAttack(int[] attacktmp){
+        for(int i=0;i<attacktmp.length;i++){Hero.attack[i]=attacktmp[i]+2;}
     }
     
     public void printHeroInfo(){
@@ -46,6 +45,4 @@ public class Hero extends Character{
     public String toString() {
         return "H";
     }
-    
-    
 }
