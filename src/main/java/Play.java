@@ -16,9 +16,14 @@ public class Play {
     public static void main(String[] args) throws Exception{
         Scanner keyboard = new Scanner(System.in);
         Point[] listOfChoice = new Point[4];
+        
+        /*Boolean for ending*/
         boolean END = false;
-        Dungeon donjon = new Dungeon(5,5);
+        
+        /*DUNGEON SIZE*/
+        Dungeon donjon = new Dungeon(10,10);
         Point position = new Point(0,0);
+        
         Hero hero = new Hero(position, 50, newHero());
         donjon.dungeonGenerator(hero);
         
@@ -50,6 +55,27 @@ public class Play {
                     default:
                         throw new Exception("INVALIDE INPUT ! ENTER U(up),D(down),L(left),R(right) or I(inventory).");
                 }
+=======
+            String choice = keyboard.nextLine();
+            
+            switch(choice.charAt(0)){
+                case'U':
+                    END=action(hero,donjon.getBloc(listOfChoice[0]),donjon.getBloc(hero.position));
+                    break;
+                case'D':
+                    END=action(hero,donjon.getBloc(listOfChoice[1]),donjon.getBloc(hero.position));
+                    break;
+                case'L':
+                    END=action(hero,donjon.getBloc(listOfChoice[2]),donjon.getBloc(hero.position));
+                    break;
+                case'R':
+                    END=action(hero,donjon.getBloc(listOfChoice[3]),donjon.getBloc(hero.position));
+                    break;
+                case'I':
+                    System.out.println("INVENTORY :");
+                    hero.printInventory();
+                    break;
+>>>>>>> Stashed changes
             }
             catch (Exception err){
                 System.out.println("ERROR : "+err.getMessage());
@@ -99,8 +125,7 @@ public class Play {
         return blocList;
     }
     
-    public static void action(Hero hero, Bloc bloc, Bloc oldBloc){
-        
+    public static boolean action(Hero hero, Bloc bloc, Bloc oldBloc){
         if(bloc == null){
             System.out.println("You shall not pass");
         }
@@ -130,6 +155,9 @@ public class Play {
             if(result){
                 bloc.setCharacter(null);
             }
+            else{
+                return true;
+            }
         }
         else if(bloc instanceof TrapBloc){
             hero.move(bloc.getPosition());
@@ -140,6 +168,9 @@ public class Play {
                 if(result){
                     ((TrapBloc) bloc).activated=true;
                 }
+                else{
+                    return true;
+                }
             }
         }
         else{
@@ -147,6 +178,7 @@ public class Play {
             bloc.setCharacter(hero);
             oldBloc.setCharacter(null);
         }
+        return false;
     }
     
     public static String newHero(){

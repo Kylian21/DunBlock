@@ -42,7 +42,7 @@ public class TrapBloc extends Bloc implements Damager{
             return "=";
         }
         else{
-            return "x";
+            return " ";
         }
     }
 }
