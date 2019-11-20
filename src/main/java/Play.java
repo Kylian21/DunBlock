@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author Kylian Salomon
  */
 public class Play {
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
         Scanner keyboard = new Scanner(System.in);
         Point[] listOfChoice = new Point[4];
         boolean END = false;
@@ -27,30 +27,35 @@ public class Play {
             hero.printHeroInfo();
             listOfChoice = possibilities(hero,donjon);
             System.out.println("ENTER YOUR CHOICE :");
-            String choice = keyboard.nextLine();
-            
-            switch(choice.charAt(0)){
-                case'U':
-                    action(hero,donjon.getBloc(listOfChoice[0]),donjon.getBloc(hero.position));
-                    break;
-                case'D':
-                    action(hero,donjon.getBloc(listOfChoice[1]),donjon.getBloc(hero.position));
-                    break;
-                case'L':
-                    action(hero,donjon.getBloc(listOfChoice[2]),donjon.getBloc(hero.position));
-                    break;
-                case'R':
-                    action(hero,donjon.getBloc(listOfChoice[3]),donjon.getBloc(hero.position));
-                    break;
-                case'I':
-                    System.out.println("INVENTORY :");
-                    hero.printInventory();
-                    break;
+            String choice = keyboard.nextLine().toUpperCase();
+
+            try{
+                switch(choice.charAt(0)){
+                    case'U':
+                        action(hero,donjon.getBloc(listOfChoice[0]),donjon.getBloc(hero.position));
+                        break;
+                    case'D':
+                        action(hero,donjon.getBloc(listOfChoice[1]),donjon.getBloc(hero.position));
+                        break;
+                    case'L':
+                        action(hero,donjon.getBloc(listOfChoice[2]),donjon.getBloc(hero.position));
+                        break;
+                    case'R':
+                        action(hero,donjon.getBloc(listOfChoice[3]),donjon.getBloc(hero.position));
+                        break;
+                    case'I':
+                        System.out.println("INVENTORY :");
+                        hero.printInventory();
+                        break;
+                    default:
+                        throw new Exception("INVALIDE INPUT ! ENTER U(up),D(down),L(left),R(right) or I(inventory).");
+                }
             }
-            
+            catch (Exception err){
+                System.out.println("ERROR : "+err.getMessage());
+            }     
         }
-            
-  }
+    }
    
     public static Point[] possibilities(Hero hero, Dungeon donjon){
         char keyboardList[]  = {'U','D','L','R','I'};
