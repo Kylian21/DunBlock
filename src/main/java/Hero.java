@@ -15,7 +15,6 @@ public class Hero extends Character{
     private List<Tool> item;
 
     public Hero(Point position,int healthPoint, String name) {
-        super(position,healthPoint,name);
         super(position,name,healthPoint);
     }
 

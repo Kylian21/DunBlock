@@ -16,7 +16,7 @@ public interface Damager {
     abstract void setAttack(int[] attack);
     
     default int[] getAttack(){
-        return Damager.attack;
+        return this.attack;
     }
     
     default void attackaCharacter(Character charAttack,int[] attackArray){

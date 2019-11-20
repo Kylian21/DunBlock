@@ -11,8 +11,8 @@
 public class Monster extends Character implements LingotDrop{
     
     private final Mineral mineralType = randomMineral();
-    
-        super(position,name,healtPoint);
+    public Monster(Point position, String name,int healthPoint){
+        super(position,name,healthPoint);
     }    
     
     @Override
