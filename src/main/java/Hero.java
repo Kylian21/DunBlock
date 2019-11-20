@@ -1,3 +1,4 @@
+import java.util.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,7 +12,7 @@
 public class Hero extends Character{
     
     private int[] lingots = new int[3];
-    private Tool[] Inventory;
+    private List<Tool> item;
 
     public Hero(Point position,int healthPoint, String name) {
         super(position,healthPoint,name);
@@ -38,7 +39,9 @@ public class Hero extends Character{
     public void setLingot(int value, int index){
         this.lingots[index]= value;
     }
-    
+    public void setTool(Tool item){
+        this.item.add(item);
+    }
     @Override
     public String toString() {
         return "H";

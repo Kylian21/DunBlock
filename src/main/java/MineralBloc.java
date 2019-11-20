@@ -32,6 +32,7 @@ public class MineralBloc extends Bloc implements LingotDrop{
     
     @Override
     public String toString() {
+        if(super.getCharacter() instanceof Hero){return "H";}
         if(this.blocMined){return " ";}
         else return "*";
         

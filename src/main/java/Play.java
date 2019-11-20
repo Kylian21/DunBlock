@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Play {
     public static void main(String[] args){
         Scanner keyboard = new Scanner(System.in);
-        Bloc[] listOfChoice = new Bloc[4];
+        Point[] listOfChoice = new Point[4];
         boolean END = false;
         Dungeon donjon = new Dungeon(5,5);
         Point position = new Point(0,0);
@@ -29,18 +29,19 @@ public class Play {
             listOfChoice = possibilities(hero,donjon);
             System.out.println("Entrez votre choix : ");
             String choice = keyboard.nextLine();
+            
             switch(choice.charAt(0)){
                 case'U':
-                    action(hero,listOfChoice[0],donjon.getBloc(hero.position));
+                    action(hero,donjon.getBloc(listOfChoice[0]),donjon.getBloc(hero.position));
                     break;
                 case'D':
-                    action(hero,listOfChoice[1],donjon.getBloc(hero.position));
+                    action(hero,donjon.getBloc(listOfChoice[1]),donjon.getBloc(hero.position));
                     break;
                 case'L':
-                    action(hero,listOfChoice[2],donjon.getBloc(hero.position));
+                    action(hero,donjon.getBloc(listOfChoice[2]),donjon.getBloc(hero.position));
                     break;
                 case'R':
-                    action(hero,listOfChoice[3],donjon.getBloc(hero.position));
+                    action(hero,donjon.getBloc(listOfChoice[3]),donjon.getBloc(hero.position));
                     break;
             }
             
@@ -48,32 +49,40 @@ public class Play {
             
   }
    
-    public static Bloc[] possibilities(Hero hero, Dungeon donjon){
+    public static Point[] possibilities(Hero hero, Dungeon donjon){
         char keyboardList[]  = {'U','D','L','R'};
-        Bloc [] blocList = new Bloc[4];
+        Point [] blocList = new Point[4];
         Point positionUp = new Point(hero.position.getX(),hero.position.getY()-1);
         Point positionDown = new Point(hero.position.getX(),hero.position.getY()+1);
         Point positionLeft = new Point(hero.position.getX()-1,hero.position.getY());
         Point positionRight = new Point(hero.position.getX()+1,hero.position.getY());
        
-        blocList[0]=donjon.getBloc(positionUp);
-        blocList[1]=donjon.getBloc(positionDown);
-        blocList[2]=donjon.getBloc(positionLeft);
-        blocList[3]=donjon.getBloc(positionRight);
+        blocList[0]=positionUp;
+        blocList[1]=positionDown;
+        blocList[2]=positionLeft;
+        blocList[3]=positionRight;
         System.out.println();
         for (int i=0;i<4;i++){
-           if(blocList[i] == null){System.out.println(keyboardList[i]+" : Vous ne pouvez pas aller dans cette direction !");}
-           else if(blocList[i] instanceof MineralBloc){
-               MineralBloc tmp = (MineralBloc) blocList[i];
-               if(!tmp.isBlocMined()){
-                System.out.println(keyboardList[i]+" : Vous pouvez miner un bloc de "+tmp.getMineralType()+" ?");
+           Bloc tmp = donjon.getBloc(blocList[i]);
+           if(tmp == null){System.out.println(keyboardList[i]+" : Vous ne pouvez pas aller dans cette direction !");}
+           
+           else if(tmp instanceof MineralBloc){
+               if(!((MineralBloc)tmp).isBlocMined()){
+                System.out.println(keyboardList[i]+" : Vous pouvez miner un bloc de "+((MineralBloc)tmp).getMineralType()+" ?");
                }
                else System.out.println(keyboardList[i]+" : Le minerai a déja été miné, vous pouvez aller dans cette direction !");
            }
-           else if(blocList[i].getCharacter()!= null){System.out.println(keyboardList[i]+" : Affronter le monstre ?");}
-           else if(blocList[i] instanceof ChestBloc){
-               System.out.println(keyboardList[i]+"You found a chest, Open it ?");
+           
+           else if(tmp instanceof ChestBloc){
+               if(!((ChestBloc)tmp).isEmptyChest()){
+                   System.out.println(keyboardList[i]+" : The chest is already open !");
+               }
+               else{
+               System.out.println(keyboardList[i]+" : You found a chest, Open it ?");}
            }
+           
+           else if(tmp.getCharacter() instanceof Monster){System.out.println(keyboardList[i]+" : Affronter le monstre ?");}
+           
            else{System.out.println(keyboardList[i]+" : Vous pouvez aller dans cette direction !");}
         }
         
@@ -81,12 +90,16 @@ public class Play {
     }
     
     public static void action(Hero hero, Bloc bloc, Bloc oldBloc){
-        if(bloc == null){System.out.println("You shall not pass");}
+        
+        if(bloc == null){
+            System.out.println("You shall not pass");
+        }
+        
         else if(bloc instanceof MineralBloc){
-            MineralBloc tmp = (MineralBloc) bloc;
-            if(!tmp.isBlocMined()){
-               tmp.dropLingot(tmp.getMineralType(), hero);
-               tmp.setBlocMined(true);
+
+            if(!((MineralBloc)bloc).isBlocMined()){
+               ((MineralBloc)bloc).dropLingot(((MineralBloc)bloc).getMineralType(), hero);
+               ((MineralBloc)bloc).setBlocMined(true);
             }
             else{
                 hero.move(bloc.getPosition());
@@ -96,6 +109,16 @@ public class Play {
         }
         else if(bloc instanceof ChestBloc){
             
+            if(!((ChestBloc)bloc).isEmptyChest()){
+                hero.setTool(((ChestBloc)bloc).getTool());
+                ((ChestBloc)bloc).setEmptyChest(true);
+            }
+        }
+        else if(bloc.getCharacter() instanceof Monster){
+            boolean result = attackaMonster((Monster)bloc.getCharacter(), hero);
+            if(result){
+                bloc.setCharacter(null);
+            }
         }
         else{
             hero.move(bloc.getPosition());
@@ -124,7 +147,7 @@ public class Play {
         return heroName;
     }
     
-    public static void attackaMonster(Monster monster,Hero hero){
+    public static boolean attackaMonster(Monster monster,Hero hero){
         Random rand=new Random();
         
         while(monster.healthPoint>0 && hero.healthPoint>0){
@@ -137,10 +160,12 @@ public class Play {
             System.out.println(hero.name+"HP ="+hero.healthPoint);
         }
         if(monster.healthPoint<=0){
-            hero.position=monster.position;
+            System.out.println("YOU KILL THE MONSTER");
+            return true;
         }
-        else if(hero.healthPoint<=0){
+        else{
             System.out.println("YOU ARE DEAD");
+            return false;
         }
     }
 }   

@@ -19,10 +19,10 @@ public class Dungeon {
     }
     
     public void dungeonGenerator(Hero hero){
-        for(int i=0;i<SIZEY;i++){
-            for(int k=0;k<SIZEX;k++){
-                Point position = new Point(k,i);
-                this.room[i][k] = blocGenerator(position,hero);
+        for(int y=0;y<SIZEY;y++){
+            for(int x=0;x<SIZEX;x++){
+                Point position = new Point(x,y);
+                this.room[y][x] = blocGenerator(position,hero);
             }
         }
     }
@@ -62,22 +62,22 @@ public class Dungeon {
     
     
     public void printDungeon(){
-        for(int i=0;i<SIZEY;i++){
-            if(i==0){
-                for(int z=0;z<SIZEX*2+2;z++){
+        for(int y=0;y<SIZEY;y++){
+            if(y==0){
+                for(int i=0;i<SIZEX*2+2;i++){
                     System.out.print("-");
                 }
                 System.out.println();
             }
             
             System.out.print("|");
-            for(int k=0;k<SIZEX;k++){
-                System.out.print(this.room[k][i]);
+            for(int x=0;x<SIZEX;x++){
+                System.out.print(this.room[y][x]);
                 System.out.print(" ");
             }
             System.out.print("|");
             System.out.println();
-            if(i==SIZEY-1){
+            if(y==SIZEY-1){
                 for(int z=0;z<SIZEX*2+2;z++){
                     System.out.print("-");
                 }
@@ -87,7 +87,7 @@ public class Dungeon {
     
     public Bloc getBloc(Point position){
         if (position.getX()<0 || position.getX()>=SIZEX || position.getY()<0 || position.getY()>=SIZEY){return null;}
-        else return this.room[(int)position.getX()][(int)position.getY()];
+        else return this.room[(int)position.getY()][(int)position.getX()];
     }
     
 }

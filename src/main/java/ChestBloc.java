@@ -10,12 +10,13 @@
  */
 public class ChestBloc extends Bloc {
     Tool randomTool = randomTool();
+    boolean emptyChest = false;
 
     public ChestBloc(Character character, Point position) {
         super(position);
     }
     
-    public Tool randomTool(){
+    private Tool randomTool(){
         
         double _randomNumber = Math.random()*(100);
         if(_randomNumber<=50){
@@ -28,8 +29,19 @@ public class ChestBloc extends Bloc {
         }
     }
 
-    public Tool getRandomTool() {
+    public Tool getTool() {
         return randomTool;
+    }
+    public void clearChest(){
+        this.randomTool=null;
+    }
+
+    public boolean isEmptyChest() {
+        return emptyChest;
+    }
+
+    public void setEmptyChest(boolean emptyChest) {
+        this.emptyChest = emptyChest;
     }
     
     @Override
