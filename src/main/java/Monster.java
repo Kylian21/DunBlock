@@ -13,12 +13,12 @@ public class Monster extends Character implements LingotDrop{
     private final Mineral mineralType = randomMineral();
     public Monster(Point position, String name,int healthPoint,int [] attackFromTXT){
         super(position,name,healthPoint);
-        setAttack(attackFromTXT);
+        setAttack(super.attack,attackFromTXT);
     }    
     
     @Override
-    public final void setAttack(int[] attacktmp){
-        System.arraycopy(attacktmp, 0, super.attack, 0, attacktmp.length);
+    public final void setAttack(int[] characterAttack,int[] newAttack){
+        System.arraycopy(newAttack, 0, super.attack, 0, characterAttack.length);
     }
 
     public Mineral getMineralType() {

@@ -9,10 +9,10 @@
  * @author Kylian Salomon
  */
 public class ChestBloc extends Bloc {
-    private Tool randomTool = randomTool();
-    boolean emptyChest = false;
+    private Tool tool = randomTool();
+    private boolean emptyChest = false;
 
-    public ChestBloc(Character character, Point position) {
+    public ChestBloc(Point position) {
         super(position);
     }
     
@@ -30,10 +30,10 @@ public class ChestBloc extends Bloc {
     }
 
     public Tool getTool() {
-        return randomTool;
+        return this.tool;
     }
     public void clearChest(){
-        this.randomTool=null;
+        this.tool=null;
     }
 
     public boolean isEmptyChest() {

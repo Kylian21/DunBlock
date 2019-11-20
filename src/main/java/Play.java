@@ -17,7 +17,7 @@ public class Play {
         Scanner keyboard = new Scanner(System.in);
         Point[] listOfChoice = new Point[4];
         boolean END = false;
-        Dungeon donjon = new Dungeon(10,10);
+        Dungeon donjon = new Dungeon(5,5);
         Point position = new Point(0,0);
         Hero hero = new Hero(position, 50, newHero());
         donjon.dungeonGenerator(hero);
@@ -25,9 +25,8 @@ public class Play {
         while(!END){
             donjon.printDungeon();
             hero.printHeroInfo();
-            System.out.println(hero.position);
             listOfChoice = possibilities(hero,donjon);
-            System.out.println("ENTER YOUR CHOICE : (I for inventory)");
+            System.out.println("ENTER YOUR CHOICE :");
             String choice = keyboard.nextLine();
             
             switch(choice.charAt(0)){
@@ -45,6 +44,7 @@ public class Play {
                     break;
                 case'I':
                     System.out.println("INVENTORY :");
+                    hero.printInventory();
                     break;
             }
             
@@ -53,7 +53,7 @@ public class Play {
   }
    
     public static Point[] possibilities(Hero hero, Dungeon donjon){
-        char keyboardList[]  = {'U','D','L','R'};
+        char keyboardList[]  = {'U','D','L','R','I'};
         Point [] blocList = new Point[4];
         Point positionUp = new Point(hero.position.getX(),hero.position.getY()-1);
         Point positionDown = new Point(hero.position.getX(),hero.position.getY()+1);
@@ -90,7 +90,7 @@ public class Play {
            }
            else{System.out.println(keyboardList[i]+" : You can go this way !");}
         }
-        
+        System.out.println(keyboardList[4]+" : Open the inventory");
         return blocList;
     }
     
@@ -115,6 +115,7 @@ public class Play {
         else if(bloc instanceof ChestBloc){
             
             if(!((ChestBloc)bloc).isEmptyChest()){
+                System.out.println("You found a "+((ChestBloc)bloc).getTool());
                 hero.setTool(((ChestBloc)bloc).getTool());
                 ((ChestBloc)bloc).setEmptyChest(true);
             }

@@ -17,15 +17,28 @@ public interface LingotDrop {
     }
     default void dropLingot(Mineral mineralsType, Hero hero){
         double _randomNumber = (Math.random()*(2))+1;
+        switch(hero.getItem(1).getMineralType()){
+            case Iron: 
+                _randomNumber += 1;
+                break;
+            case Gold: 
+                _randomNumber+=3;
+                break;
+            case Diamond: 
+                _randomNumber+=5;
+                break;
+            default:
+                break;
+        }
         if(null != mineralsType)switch (mineralsType) {
             case Iron:
-                hero.setLingot((int)_randomNumber, 0);
+                hero.addLingot((int)_randomNumber, 0);  
                 break;
             case Gold:
-                hero.setLingot((int)_randomNumber, 1);
+                hero.addLingot((int)_randomNumber, 1);
                 break;
             case Diamond:
-                hero.setLingot((int)_randomNumber, 2);
+                hero.addLingot((int)_randomNumber, 2);
                 break;
             default:
                 break;

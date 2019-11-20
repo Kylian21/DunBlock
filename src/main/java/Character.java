@@ -30,9 +30,6 @@ public abstract class Character implements Damager{
     }
     
     @Override
-    public abstract void setAttack(int[] attack);
-    
-    @Override
     public int[] getAttack(){
         return this.attack;
     }

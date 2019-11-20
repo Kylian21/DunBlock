@@ -45,7 +45,7 @@ public class Dungeon {
             return trap;
         }
         else if(randomNumber<=12){//7% chance to have a ChestBloc
-            ChestBloc chest = new ChestBloc(null, position);
+            ChestBloc chest = new ChestBloc(position);
             return chest;
         }
         else if(randomNumber<=19){//7% chance to have a monster in a bloc

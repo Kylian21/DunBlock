@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Kylian Salomon
  */
 public interface Damager {
-    abstract void setAttack(int[] attack);
+    abstract void setAttack(int[] characterAttack,int[] newAttack);
     
     abstract int[] getAttack();
     

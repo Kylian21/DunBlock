@@ -15,11 +15,11 @@ public class TrapBloc extends Bloc implements Damager{
 
     public TrapBloc(Point position) {
         super(position);
-        setAttack(this.attack);
+        setAttack(this.attack,null);
     }
     
     @Override
-    public final void setAttack(int[] attack) {
+    public final void setAttack(int[] characterAttack,int[] newAttack) {
         attack[0] = 2;
         attack[1] = 2;
         attack[2] = 4;

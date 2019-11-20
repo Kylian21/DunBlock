@@ -16,6 +16,6 @@ public class PickAxe extends Tool{
 
     @Override
     public String toString() {
-        return super.getMineralType()+"PickAxe";
+        return super.getMineralType()+" PickAxe";
     }
 }
