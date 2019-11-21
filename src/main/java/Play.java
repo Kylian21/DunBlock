@@ -135,7 +135,7 @@ public class Play {
             //The hero mine the bloc, drop lingot
             if(!((MineralBloc)bloc).isBlocMined()){
                ((MineralBloc)bloc).dropLingot(((MineralBloc)bloc).getMineralType(), hero);
-               ((MineralBloc)bloc).setBlocMined(true);
+               ((MineralBloc)bloc).setBlocMined();
             }
             //If it the bloc is already mined : the hero move to this bloc
             else{
@@ -174,7 +174,7 @@ public class Play {
             if (!((TrapBloc) bloc).isActivated()){
                 boolean result = trapped((TrapBloc)bloc,hero);
                 if(result){
-                    ((TrapBloc) bloc).setActivated(true);
+                    ((TrapBloc) bloc).setActivated();
                 }
                 //Stop the game if the hero died
                 else{

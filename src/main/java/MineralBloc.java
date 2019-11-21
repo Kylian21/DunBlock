@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * DunBlock JAVA project
  */
 
 /**
@@ -12,20 +10,33 @@ public class MineralBloc extends Bloc implements LingotDrop{
     
     private final Mineral mineralType = randomMineral();
     private boolean blocMined;
-
+    /**
+     * Construct the MineralBloc
+     * @param position The position of the Bloc
+     * @see Point
+     */
     public MineralBloc(Point position) {
         super(position);
         this.blocMined=false;
     }
- 
-    public void setBlocMined(boolean blocMined) {
-        this.blocMined = blocMined;
+    /**
+     * Set the bloc mined true when the Hero destroy it
+     */
+    public void setBlocMined() {
+        this.blocMined = true;
     }
-    
+    /**
+     * 
+     * @return the mineral type of the MineralBloc
+     * @see Mineral
+     */
     public Mineral getMineralType() {
         return mineralType;
     }
-
+    /**
+     * 
+     * @return true if the bloc is mined.
+     */
     public boolean isBlocMined() {
         return blocMined;
     }

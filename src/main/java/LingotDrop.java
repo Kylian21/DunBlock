@@ -5,16 +5,33 @@
  */
 
 /**
- *
+ * This interface contains all the methods linked to the creation
+ *  of the lingots and the dropping method. 
  * @author Kylian Salomon
  */
 public interface LingotDrop {
+    /**
+     * Create a mineral randomly
+     * @return the random Mineral
+     * @see Mineral
+     */
     default Mineral randomMineral(){
         double randomNumber = Math.random()*(100);
        if(randomNumber<=10)return Mineral.Diamond;
        else if(randomNumber<=40)return Mineral.Gold;
        else return Mineral.Iron;
     }
+    /**
+     * When this method is called, the hero will receive a amount of lingots
+     * @param mineralsType The type of the lingot
+     * @param hero The hero of the Dungeon
+     * @see Mineral
+     * @see Hero
+     * @see PickAxe
+     * @see Hero#getItem(int) 
+     * @see PickAxe#getPickAxeAdvantage()
+     * @see Hero#addLingot(int, int) 
+     */
     default void dropLingot(Mineral mineralsType, Hero hero){
         double _randomNumber = (Math.random()*(2))+1;
        

@@ -1,17 +1,21 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * DunBlock JAVA project
  */
 
 /**
- *
- * @author Kylian Salomon
+ * The pickAxe is a tool which can be hold by the Hero and only be
+ *  found in chest. Each pickAxe have a mineral Type and give a bonus
+ *  to the hero when he destroy a MineralBloc.
+ * @author Louis HARISMENDY & Kylian SALOMON
  */
 public class PickAxe extends Tool{
     
     private int pickAxeAdvantage;
-
+    /**
+     * Construct the PickAxe by giving it a mineral type and call
+     * set the advantage of the pickAxe.
+     * @see PickAxe#pickAxeAdvantage
+     */
     public PickAxe() {
         switch(super.getMineralType()){
             case Iron: 
@@ -27,11 +31,18 @@ public class PickAxe extends Tool{
                 break;
         }
     }
-
+    /**
+     * Set a advantage whiwh depend of the mineral type of 
+     * the pickAxe.
+     * @param pickAxeAdvantage 
+     */
     private void setPickAxeAdvantage(int pickAxeAdvantage) {
         this.pickAxeAdvantage = pickAxeAdvantage;
     }
-
+    /**
+     * 
+     * @return the pickAxeAdvantage.
+     */
     public int getPickAxeAdvantage() {
         return pickAxeAdvantage;
     } 

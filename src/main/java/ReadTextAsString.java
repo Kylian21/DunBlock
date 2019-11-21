@@ -1,11 +1,13 @@
-/*
- * DunBlock JAVA project
- */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.*;; 
+/*
+ * DunBlock JAVA project
+ */
+
 /**
- * Class to read the Monster.txt
+ * Class which read the text as string
  * @author Louis HARISMENDY & Kylian SALOMON
  */
 public class ReadTextAsString {

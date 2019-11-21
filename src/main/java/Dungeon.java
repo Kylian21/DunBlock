@@ -14,14 +14,21 @@ public class Dungeon {
     private int monsterNumber =0;
     
     /**
-     * Construct the Dung
+     * @see Bloc
+     * Construct the Dungeon and create the room
      * @param SIZE size of the dungeon
      */
     public Dungeon(int SIZE) {
         this.SIZE = SIZE;
         this.room = new Bloc [SIZE][SIZE];
     }
-    
+    /**
+     * Create a unique point for each bloc and generate a bloc.
+     * @see Dungeon#blocGenerator(Point, Hero) 
+     * @see Point
+     * @see Hero
+     * @param hero the hero of the game
+     */
     public void dungeonGenerator(Hero hero){
         for(int y=0;y<SIZE;y++){
             for(int x=0;x<SIZE;x++){
@@ -31,7 +38,25 @@ public class Dungeon {
         }
     }
     
-    
+    /**
+     * Generate a bloc with 5% chance to be a TrapBloc, 7% chance to be a ChestBloc
+     *  7% chance to be a bloc with a monster inside, 20% chance to be a 
+     *  MineralBloc. It create a random number and then create the correspondant bloc.
+     * @param position the position of the bloc
+     * @param hero the hero of the Dungeon
+     * @return the bloc choosen randomly
+     * @see Point
+     * @see Hero
+     * @see Bloc
+     * @see Point#getX() 
+     * @see Point#getY()
+     * @see Bloc#setCharacter(Character)
+     * @see TrapBloc
+     * @see ChestBloc
+     * @see Monster
+     * @see ReadTextAsString
+     * @see MineralBloc
+     */
     public Bloc blocGenerator(Point position,Hero hero){
         double randomNumber = Math.random()*(100);       
         
@@ -57,6 +82,7 @@ public class Dungeon {
             catch(Exception e){
                 System.out.println(e);
             }
+            //We separate the different monsters and add them in the dungeon
             String[] monsterElement = monsters[monsterNumber%4].split(";");
             for(int i=0;i<tmpAttack.length;i++){
                 String [] tmp = monsterElement[2].split(",");
@@ -78,7 +104,9 @@ public class Dungeon {
         }
     }
     
-    
+    /**
+     * Display the dungeon
+     */
     public void printDungeon(){
         for(int y=0;y<SIZE;y++){
             if(y==0){
@@ -103,6 +131,11 @@ public class Dungeon {
         }
     }
     
+    /**
+     * Return the Bloc with the given position.
+     * @param position The position of the Bloc
+     * @return The bloc correspondant to the position
+     */
     public Bloc getBloc(Point position){
         if (position.getX()<0 || position.getX()>=SIZE || position.getY()<0 || position.getY()>=SIZE){return null;}
         else return this.room[(int)position.getY()][(int)position.getX()];

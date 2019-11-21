@@ -3,18 +3,38 @@
  */
 
 /**
- * Class with parameters of 
+ * This is one of the different bloc and it inflict damage to
+ *  the hero.It is hidden on the map until the Hero walk through.
  * @author Louis HARISMENDY & Kylian SALOMON
  */
 
 public class TrapBloc extends Bloc implements Damager{
     
-    private int [] attack = new int[6];
-    private boolean activated = false;
-
+    private final int [] attack = new int[6];
+    private boolean activated;
+    /**
+     * Construct the TrapBloc and set it attack and hide it
+     *  by set the variable activated false.
+     * @param position the position of the TrapBloc.
+     */
     public TrapBloc(Point position) {
         super(position);
+        this.activated = false;
         setAttack(this.attack,null);
+    }
+    /**
+     * 
+     * @return true if the true if the Hero walk through
+     */
+    public boolean isActivated() {
+        return activated;
+    }
+    /**
+     * 
+     *Set true when the Hero walk through
+     */
+    public void setActivated() {
+        this.activated = true;
     }
     
     public boolean isActivated() {
@@ -39,6 +59,7 @@ public class TrapBloc extends Bloc implements Damager{
     public int[] getAttack() {
         return this.attack;
     }
+    
     
     @Override
     public String toString() {

@@ -3,7 +3,7 @@
  */
 
 /**
- *
+ * The bloc correspond to a part of the Dungeon.
  * @author Louis HARISMENDY & Kylian SALOMON
  */
 public class Bloc {

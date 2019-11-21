@@ -70,10 +70,6 @@ public class ChestBloc extends Bloc {
         this.emptyChest = true;
     }
     
-    /**
-     * 
-     * @return a string which represente the chest.
-     */
     @Override
     public String toString() {
         return "@";
