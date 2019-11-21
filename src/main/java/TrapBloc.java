@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * DunBlock JAVA project
  */
 
 /**
- *
- * @author Kylian Salomon
+ * Class with parameters of 
+ * @author Louis HARISMENDY & Kylian SALOMON
  */
+
 public class TrapBloc extends Bloc implements Damager{
     
     private int [] attack = new int[6];
@@ -16,6 +15,14 @@ public class TrapBloc extends Bloc implements Damager{
     public TrapBloc(Point position) {
         super(position);
         setAttack(this.attack,null);
+    }
+    
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
     
     @Override
@@ -31,14 +38,6 @@ public class TrapBloc extends Bloc implements Damager{
     @Override
     public int[] getAttack() {
         return this.attack;
-    }
-
-    public boolean isActivated() {
-        return activated;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
     }
     
     @Override

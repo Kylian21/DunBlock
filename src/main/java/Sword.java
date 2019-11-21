@@ -1,16 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * DunBlock JAVA project
  */
 
 /**
- *
- * @author Kylian Salomon
+ * Class with parameters of a sword
+ * @author Louis HARISMENDY & Kylian SALOMON
  */
 public class Sword extends Tool{
     private final int[] attack = new int[6];
-
+    
+    /**
+     * The constructor with the different attack table differenced made by the sword mineral type
+     */
     public Sword() {
         
         switch(super.getMineralType()){
@@ -42,7 +43,11 @@ public class Sword extends Tool{
                 break;
         }
     }
-
+    
+    /**
+     * Get the attack table of a sword
+     * @return the attack table of a sword
+     */
     public int[] getAttack() {
         return attack;
     }

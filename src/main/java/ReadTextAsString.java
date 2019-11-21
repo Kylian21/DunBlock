@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * DunBlock JAVA project
  */
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,9 +10,9 @@ import java.nio.file.*;;
  */
 public class ReadTextAsString {
     /**
-     * 
-     * @return
-     * @throws Exception when the file 
+     * Open and read the Monster.txt file.
+     * @return the string readed in Monster.txt
+     * @throws Exception when the file is not found
      */
   public static String readFileAsString()throws Exception 
   { 
