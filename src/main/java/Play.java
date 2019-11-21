@@ -1,17 +1,15 @@
+/*
+ * DunBlock JAVA project
+ */
 
 import java.util.Random;
 import java.util.Scanner;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Class with the main method where the game is launch.
+ * @author Louis HARISMENDY & Kylian SALOMON
  */
 
-/**
- *
- * @author Kylian Salomon
- */
 public class Play {
     public static void main(String[] args) throws Exception{
         Scanner keyboard = new Scanner(System.in);
@@ -19,12 +17,18 @@ public class Play {
         
         /*Boolean for ending*/
         boolean END = false;
+        
+        /*DUNGEON SIZE DEFINED HERE*/
         Dungeon donjon = new Dungeon(10);
         Point position = new Point(0,0);
         
+        /*Create the Hero of the game*/
         Hero hero = new Hero(position, 50, newHero());
+        
+        /*Dugeon Generation*/
         donjon.dungeonGenerator(hero);
         
+        /*GAME*/
         while(!END){
             donjon.printDungeon();
             hero.printHeroInfo();
@@ -33,6 +37,8 @@ public class Play {
             String choice = keyboard.nextLine().toUpperCase();
 
             try{
+                /*The user enter a char and we test the char to run the action
+                 The END Boolean is test at every action if we need to stop the game*/
                 switch(choice.charAt(0)){
                     case'U':
                         END=action(hero,donjon.getBloc(listOfChoice[0]),donjon.getBloc(hero.getPosition()));
@@ -60,6 +66,14 @@ public class Play {
         }
     }
    
+    /**
+     * Test all the possibilities around the hero and print them.
+     * @see Hero
+     * @see Dungeon
+     * @param hero the hero of the game
+     * @param donjon the dungeon generated
+     * @return return the position of the block around the hero
+     */
     public static Point[] possibilities(Hero hero, Dungeon donjon){
         char keyboardList[]  = {'U','D','L','R','I'};
         Point [] blocList = new Point[4];
@@ -75,7 +89,7 @@ public class Play {
         System.out.println();
         for (int i=0;i<4;i++){
            Bloc tmp = donjon.getBloc(blocList[i]);
-           
+           //Limit of the map
            if(tmp == null){System.out.println(keyboardList[i]+" : You can't go this way !");}
            
            else if(tmp instanceof MineralBloc){
@@ -102,40 +116,57 @@ public class Play {
         return blocList;
     }
     
+    /**
+     * When call, run the actions choosen by the user.
+     * @see Hero
+     * @see Bloc
+     * @param hero of the game
+     * @param bloc the future bloc where the hero will be
+     * @param oldBloc the bloc where the hero is
+     * @return the END Boolean (true to stop the game)
+     */
     public static boolean action(Hero hero, Bloc bloc, Bloc oldBloc){
+        //Limit of the map
         if(bloc == null){
             System.out.println("You shall not pass");
         }
-        
+        //MineralBloc
         else if(bloc instanceof MineralBloc){
-
+            //The hero mine the bloc, drop lingot
             if(!((MineralBloc)bloc).isBlocMined()){
                ((MineralBloc)bloc).dropLingot(((MineralBloc)bloc).getMineralType(), hero);
                ((MineralBloc)bloc).setBlocMined(true);
             }
+            //If it the bloc is already mined : the hero move to this bloc
             else{
                 hero.move(bloc.getPosition());
                 bloc.setCharacter(hero);
                 oldBloc.setCharacter(null);
             }
         }
+        //Chest
         else if(bloc instanceof ChestBloc){
-            
+            //Open the chest, take the tool inside
             if(!((ChestBloc)bloc).isEmptyChest()){
                 System.out.println("You found a "+((ChestBloc)bloc).getTool());
                 hero.setTool(((ChestBloc)bloc).getTool());
                 ((ChestBloc)bloc).setEmptyChest();
             }
         }
+        //Monster
+        //Attack the monster, IF the hero kill the monster then it disapear
         else if(bloc.getCharacter() instanceof Monster){
             boolean result = attackaMonster((Monster)bloc.getCharacter(), hero);
             if(result){
                 bloc.setCharacter(null);
             }
+            //Stop the game if the hero died
             else{
                 return true;
             }
         }
+        //Trap
+        //The hero take damage by moving to this bloc
         else if(bloc instanceof TrapBloc){
             hero.move(bloc.getPosition());
             bloc.setCharacter(hero);
@@ -145,19 +176,27 @@ public class Play {
                 if(result){
                     ((TrapBloc) bloc).setActivated(true);
                 }
+                //Stop the game if the hero died
                 else{
                     return true;
                 }
             }
         }
+        //Simple bloc empty : the hero move to this bloc
         else{
             hero.move(bloc.getPosition());
             bloc.setCharacter(hero);
             oldBloc.setCharacter(null);
         }
+        //default : return false to not stop the game
         return false;
     }
     
+    /**
+     * Display the beginning of the game.
+     * Ask the user to enter is initials.
+     * @return the name of the hero
+     */
     public static String newHero(){
         String heroName;
         Scanner nameInput = new Scanner(System.in);
@@ -178,8 +217,14 @@ public class Play {
         return heroName;
     }
     
+    /**
+     * Fight between a monster and hero. The hero attack first and the fight finish when one of the two is dead
+     * @param monster the monster in the fight
+     * @param hero the hero in the fight
+     * @return the result of the fight (false the hero is dead,true the monster is dead)
+     */
     public static boolean attackaMonster(Monster monster,Hero hero){
-        while(monster.healthPoint>0 && hero.healthPoint>0){
+        while(monster.isAlive() && hero.isAlive()){
             System.out.print(hero.name);
             hero.attackaCharacter(monster, hero.getAttack());
             if(monster.healthPoint>=0){
@@ -187,7 +232,7 @@ public class Play {
                 monster.attackaCharacter(hero, monster.getAttack());
             }
         }
-        if(monster.healthPoint<=0){
+        if(!monster.isAlive()){
             System.out.println("YOU KILL THE MONSTER");
             monster.dropLingot(monster.getMineralType(), hero);
             return true;
@@ -198,10 +243,16 @@ public class Play {
         }
     }
     
+    /**
+     * When a hero enter a trap : the trap attack the hero.
+     * @param trap the trap selected
+     * @param hero the hero trapped
+     * @return the result of the trap (false the hero is dead,true the monster is dead)
+     */
     public static boolean trapped(TrapBloc trap,Hero hero){
         trap.attackaCharacter(hero, trap.getAttack());
         System.out.println("YOU HAVE BEEN TRAPPED");
-        if(hero.healthPoint<=0){
+        if(!hero.isAlive()){
             System.out.println("YOU ARE DEAD");
             return false;
         }

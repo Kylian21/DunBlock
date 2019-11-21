@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * DunBlock JAVA project
  */
 
 /**
- *
- * @author Kylian Salomon
+ * This class contains the parameters of a character
+ * @author Louis HARISMENDY Kylian SALOMON
  */
 public abstract class Character implements Damager{
     
@@ -15,6 +13,13 @@ public abstract class Character implements Damager{
     protected int healthPoint​;
     protected String name ;
 
+    /**
+     * The constructor
+     * @see Point
+     * @param position of the Character
+     * @param name of the Character
+     * @param healthPoint of the Character
+     */
     public Character(Point position,String name,int healthPoint) {
         this.position = position;
         this.healthPoint = healthPoint;
@@ -28,14 +33,27 @@ public abstract class Character implements Damager{
     @Override
     public abstract void setAttack(int[] characterAttack,int[] newAttack);
     
+    /**
+     * Set the Position
+     * @see Point
+     * @param position 
+     */
     public void setPosition(Point position) {
         this.position = position;
     }
     
-    public boolean isAlive(int healthPoint){
-        return (healthPoint<0);
+    /**
+     * Test if the character is Alive
+     * @return true if the character is Alive (false if not)
+     */
+    public boolean isAlive(){
+        return (this.healthPoint>0);
     }
     
+    /**
+     * @see Damager
+     * 
+     */
     @Override
     public int[] getAttack(){
         return this.attack;

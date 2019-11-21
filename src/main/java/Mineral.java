@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * DunBlock JAVA project
  */
 
 /**
- *
- * @author Kylian Salomon
+ * Enumeration of mineral Type
+ * @author Louis HARISMENDY & Kylian SALOMON
  */
 public enum Mineral {
     Iron(),

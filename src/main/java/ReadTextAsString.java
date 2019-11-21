@@ -7,10 +7,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.*;; 
 /**
- *
- * @author Kylian Salomon
+ * Class to read the Monster.txt
+ * @author Louis HARISMENDY & Kylian SALOMON
  */
 public class ReadTextAsString {
+    /**
+     * 
+     * @return
+     * @throws Exception when the file 
+     */
   public static String readFileAsString()throws Exception 
   { 
     String data = "";  
