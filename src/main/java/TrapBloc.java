@@ -37,10 +37,6 @@ public class TrapBloc extends Bloc implements Damager{
         this.activated = true;
     }
     
-    public boolean isActivated() {
-        return activated;
-    }
-
     public void setActivated(boolean activated) {
         this.activated = activated;
     }
