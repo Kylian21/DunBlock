@@ -1,30 +1,30 @@
-
-import java.util.Arrays;
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * DunBlock JAVA project
  */
 
 /**
- *
- * @author Kylian Salomon
+ *This is the dungeon which will be display on terminal. It is construct
+ * with bloc and generate bloc. The dungeon have a size, it is square, each bloc of the Dungeon 
+ * can be a Chestbloc, MineralBloc, TrapBloc or a bloc with inside a monster or the hero.
+ * @author Louis HARISMENDY & Kylian SALOMON
  */
 public class Dungeon {
-    private int SIZEX, SIZEY;
-    private Bloc[][] room;
+    private final int SIZE;
+    private final Bloc[][] room;
     private int monsterNumber =0;
-
-    public Dungeon(int SIZEX, int SIZEY) {
-        this.SIZEX = SIZEX;
-        this.SIZEY = SIZEY;
-        this.room = new Bloc [SIZEX][SIZEY];
+    
+    /**
+     * Construct the Dung
+     * @param SIZE size of the dungeon
+     */
+    public Dungeon(int SIZE) {
+        this.SIZE = SIZE;
+        this.room = new Bloc [SIZE][SIZE];
     }
     
     public void dungeonGenerator(Hero hero){
-        for(int y=0;y<SIZEY;y++){
-            for(int x=0;x<SIZEX;x++){
+        for(int y=0;y<SIZE;y++){
+            for(int x=0;x<SIZE;x++){
                 Point position = new Point(x,y);
                 this.room[y][x] = blocGenerator(position,hero);
             }
@@ -80,23 +80,23 @@ public class Dungeon {
     
     
     public void printDungeon(){
-        for(int y=0;y<SIZEY;y++){
+        for(int y=0;y<SIZE;y++){
             if(y==0){
-                for(int i=0;i<SIZEX*2+2;i++){
+                for(int i=0;i<SIZE*2+2;i++){
                     System.out.print("-");
                 }
                 System.out.println();
             }
             
             System.out.print("|");
-            for(int x=0;x<SIZEX;x++){
+            for(int x=0;x<SIZE;x++){
                 System.out.print(this.room[y][x]);
                 System.out.print(" ");
             }
             System.out.print("|");
             System.out.println();
-            if(y==SIZEY-1){
-                for(int z=0;z<SIZEX*2+2;z++){
+            if(y==SIZE-1){
+                for(int z=0;z<SIZE*2+2;z++){
                     System.out.print("-");
                 }
             }
@@ -104,7 +104,7 @@ public class Dungeon {
     }
     
     public Bloc getBloc(Point position){
-        if (position.getX()<0 || position.getX()>=SIZEX || position.getY()<0 || position.getY()>=SIZEY){return null;}
+        if (position.getX()<0 || position.getX()>=SIZE || position.getY()<0 || position.getY()>=SIZE){return null;}
         else return this.room[(int)position.getY()][(int)position.getX()];
     }
     

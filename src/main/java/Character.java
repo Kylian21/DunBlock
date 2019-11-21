@@ -10,10 +10,10 @@
  */
 public abstract class Character implements Damager{
     
-    Point position;
-    int[] attack = new int[6];
-    int healthPoint​;
-    String name ;
+    private Point position;
+    protected int[] attack = new int[6];
+    protected int healthPoint​;
+    protected String name ;
 
     public Character(Point position,String name,int healthPoint) {
         this.position = position;
@@ -21,6 +21,13 @@ public abstract class Character implements Damager{
         this.name = name;
     }
 
+    public Point getPosition() {
+        return position;
+    }
+    
+    @Override
+    public abstract void setAttack(int[] characterAttack,int[] newAttack);
+    
     public void setPosition(Point position) {
         this.position = position;
     }

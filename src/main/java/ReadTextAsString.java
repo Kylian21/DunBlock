@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.*;; 
 /**
  *
@@ -12,11 +13,17 @@ import java.nio.file.*;;
 public class ReadTextAsString {
   public static String readFileAsString()throws Exception 
   { 
-      
-    File file = new File("src/main/java/monster.txt");
-    String path= file.getAbsolutePath();
-    String data = "";
-    data = new String(Files.readAllBytes(Paths.get(path))); 
+    String data = "";  
+    
+    try{
+        File file = new File("src/main/java/monster.txt");
+        String path= file.getAbsolutePath();
+        data = new String(Files.readAllBytes(Paths.get(path)));
+    }
+    catch(FileNotFoundException e){
+        System.out.println("e");
+        System.out.println("UNABLE TO FOUND YOUR PATH, CHECK MONSTER.TXT ");
+    }
     return data; 
   } 
   

@@ -10,10 +10,32 @@
  */
 public class PickAxe extends Tool{
     
-    public void breakMineralBloc(MineralBloc bloc){
-        bloc.setBlocMined(true);
+    private int pickAxeAdvantage;
+
+    public PickAxe() {
+        switch(super.getMineralType()){
+            case Iron: 
+                setPickAxeAdvantage(1);
+                break;
+            case Gold: 
+                setPickAxeAdvantage(3);
+                break;
+            case Diamond: 
+                setPickAxeAdvantage(5);
+                break;
+            default:
+                break;
+        }
     }
 
+    private void setPickAxeAdvantage(int pickAxeAdvantage) {
+        this.pickAxeAdvantage = pickAxeAdvantage;
+    }
+
+    public int getPickAxeAdvantage() {
+        return pickAxeAdvantage;
+    } 
+    
     @Override
     public String toString() {
         return super.getMineralType()+" PickAxe";

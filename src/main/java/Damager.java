@@ -12,9 +12,9 @@ import java.util.Random;
  * @author Kylian Salomon
  */
 public interface Damager {
-    abstract void setAttack(int[] characterAttack,int[] newAttack);
+    void setAttack(int[] characterAttack,int[] newAttack);
     
-    abstract int[] getAttack();
+    int[] getAttack();
     
     default void attackaCharacter(Character charAttacked,int[] attackArray){
         Random rand=new Random();

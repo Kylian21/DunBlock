@@ -19,9 +19,7 @@ public class Play {
         
         /*Boolean for ending*/
         boolean END = false;
-        
-        /*DUNGEON SIZE*/
-        Dungeon donjon = new Dungeon(10,10);
+        Dungeon donjon = new Dungeon(10);
         Point position = new Point(0,0);
         
         Hero hero = new Hero(position, 50, newHero());
@@ -37,16 +35,16 @@ public class Play {
             try{
                 switch(choice.charAt(0)){
                     case'U':
-                        END=action(hero,donjon.getBloc(listOfChoice[0]),donjon.getBloc(hero.position));
+                        END=action(hero,donjon.getBloc(listOfChoice[0]),donjon.getBloc(hero.getPosition()));
                         break;
                     case'D':
-                        END=action(hero,donjon.getBloc(listOfChoice[1]),donjon.getBloc(hero.position));
+                        END=action(hero,donjon.getBloc(listOfChoice[1]),donjon.getBloc(hero.getPosition()));
                         break;
                     case'L':
-                        END=action(hero,donjon.getBloc(listOfChoice[2]),donjon.getBloc(hero.position));
+                        END=action(hero,donjon.getBloc(listOfChoice[2]),donjon.getBloc(hero.getPosition()));
                         break;
                     case'R':
-                        END=action(hero,donjon.getBloc(listOfChoice[3]),donjon.getBloc(hero.position));
+                        END=action(hero,donjon.getBloc(listOfChoice[3]),donjon.getBloc(hero.getPosition()));
                         break;
                     case'I':
                         System.out.println("INVENTORY :");
@@ -65,10 +63,10 @@ public class Play {
     public static Point[] possibilities(Hero hero, Dungeon donjon){
         char keyboardList[]  = {'U','D','L','R','I'};
         Point [] blocList = new Point[4];
-        Point positionUp = new Point(hero.position.getX(),hero.position.getY()-1);
-        Point positionDown = new Point(hero.position.getX(),hero.position.getY()+1);
-        Point positionLeft = new Point(hero.position.getX()-1,hero.position.getY());
-        Point positionRight = new Point(hero.position.getX()+1,hero.position.getY());
+        Point positionUp = new Point(hero.getPosition().getX(),hero.getPosition().getY()-1);
+        Point positionDown = new Point(hero.getPosition().getX(),hero.getPosition().getY()+1);
+        Point positionLeft = new Point(hero.getPosition().getX()-1,hero.getPosition().getY());
+        Point positionRight = new Point(hero.getPosition().getX()+1,hero.getPosition().getY());
        
         blocList[0]=positionUp;
         blocList[1]=positionDown;
@@ -126,7 +124,7 @@ public class Play {
             if(!((ChestBloc)bloc).isEmptyChest()){
                 System.out.println("You found a "+((ChestBloc)bloc).getTool());
                 hero.setTool(((ChestBloc)bloc).getTool());
-                ((ChestBloc)bloc).setEmptyChest(true);
+                ((ChestBloc)bloc).setEmptyChest();
             }
         }
         else if(bloc.getCharacter() instanceof Monster){
@@ -142,10 +140,10 @@ public class Play {
             hero.move(bloc.getPosition());
             bloc.setCharacter(hero);
             oldBloc.setCharacter(null);
-            if (!((TrapBloc) bloc).activated){
+            if (!((TrapBloc) bloc).isActivated()){
                 boolean result = trapped((TrapBloc)bloc,hero);
                 if(result){
-                    ((TrapBloc) bloc).activated=true;
+                    ((TrapBloc) bloc).setActivated(true);
                 }
                 else{
                     return true;
@@ -184,8 +182,10 @@ public class Play {
         while(monster.healthPoint>0 && hero.healthPoint>0){
             System.out.print(hero.name);
             hero.attackaCharacter(monster, hero.getAttack());
-            System.out.print(monster.name);
-            monster.attackaCharacter(hero, monster.getAttack());
+            if(monster.healthPoint>=0){
+                System.out.print(monster.name);
+                monster.attackaCharacter(hero, monster.getAttack());
+            }
         }
         if(monster.healthPoint<=0){
             System.out.println("YOU KILL THE MONSTER");

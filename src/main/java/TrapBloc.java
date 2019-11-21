@@ -11,7 +11,7 @@
 public class TrapBloc extends Bloc implements Damager{
     
     private int [] attack = new int[6];
-    public boolean activated = false;
+    private boolean activated = false;
 
     public TrapBloc(Point position) {
         super(position);
@@ -31,6 +31,14 @@ public class TrapBloc extends Bloc implements Damager{
     @Override
     public int[] getAttack() {
         return this.attack;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
     
     @Override
