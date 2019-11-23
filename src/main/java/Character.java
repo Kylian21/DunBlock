@@ -30,9 +30,6 @@ public abstract class Character implements Damager{
         return position;
     }
     
-    @Override
-    public abstract void setAttack(int[] characterAttack,int[] newAttack);
-    
     /**
      * Set the Position
      * @see Point

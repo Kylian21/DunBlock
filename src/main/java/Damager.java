@@ -14,7 +14,7 @@ public interface Damager {
      * @param characterAttack is the attack table of the character we need to set
      * @param newAttack is his new attack
      */
-    void setAttack(int[] characterAttack,int[] newAttack);
+    abstract void setAttack(int[] characterAttack,int[] newAttack);
     /**
      * Get the attack
      * @see Character
